@@ -1,7 +1,9 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -10,23 +12,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class MathExamTest {
-
-    
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
-    }
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
 
     @Test
     public void testCheckInputRight1() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
@@ -171,4 +156,82 @@ public class MathExamTest {
         assertEquals(false, result);
     }
 
+    @Test
+    public void testNibolan1() throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        //测试逆波兰表达式生成方法
+        List<String> para = new ArrayList<String>();
+        para.add("3");
+        para.add("*");
+        para.add("(");
+        para.add("5");
+        para.add("+");
+        para.add("7");
+        para.add("/");
+        para.add("9");
+        para.add(")");
+        List<String> right = new ArrayList<String>();
+        right.add("3");
+        right.add("5");
+        right.add("7");
+        right.add("9");
+        right.add("/");
+        right.add("+");
+        right.add("*");
+        MathExam math = new MathExam();
+        Method method = math.getClass().getDeclaredMethod("nibolan", List.class);
+        method.setAccessible(true);
+        List<String> result = (List<String>) method.invoke(math, para);
+        assertEquals(right, result);
+    }
+    
+    @Test
+    public void testNibolan2() throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        //测试逆波兰表达式生成方法
+        List<String> para = new ArrayList<String>();
+        para.add("1");
+        para.add("+");
+        para.add("2");
+        para.add("*");
+        para.add("3");
+        para.add("+");
+        para.add("4");
+        para.add("*");
+        para.add("5");
+        List<String> right = new ArrayList<String>();
+        right.add("1");
+        right.add("2");
+        right.add("3");
+        right.add("*");
+        right.add("+");
+        right.add("4");
+        right.add("5");
+        right.add("*");
+        right.add("+");
+        MathExam math = new MathExam();
+        Method method = math.getClass().getDeclaredMethod("nibolan", List.class);
+        method.setAccessible(true);
+        List<String> result = (List<String>) method.invoke(math, para);
+        assertEquals(right, result);
+    }
+    
+    @Test
+    public void testCalc() throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        //测试后缀表达式计算方法
+        List<String> para = new ArrayList<String>();
+        para.add("1");
+        para.add("2");
+        para.add("+");
+        para.add("3");
+        para.add("4");
+        para.add("*");
+        para.add("5");
+        para.add("/");
+        para.add("-");
+        MathExam math = new MathExam();
+        Method method = math.getClass().getDeclaredMethod("calc", List.class);
+        method.setAccessible(true);
+        double result = (double) method.invoke(math, para);
+        assertEquals(0.6, result, 0.01);
+    }
+    
 }
