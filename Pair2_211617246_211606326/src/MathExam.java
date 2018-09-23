@@ -476,5 +476,8 @@ public class MathExam {
             }
         } 
     }
+    private static int add(int i, int j) {
+        return i+j;
+    }
     
 }
