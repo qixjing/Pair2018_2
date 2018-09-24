@@ -19,7 +19,8 @@ public class MathExam {
     static int grade;
     static String errMessage;
     static String[] operator = {"+", "-", "*", "/"};// 三年级符号
-    static List<String> strArrayQ, strArrayA;// 存放题目和答案用于输出到文件
+    static List<String> strArrayQ = new ArrayList<String>();// 存放题目和答案用于输出到文件
+    static List<String> strArrayA = new ArrayList<String>();
     
     
     public static void main(String[] args) throws IOException {
@@ -37,7 +38,7 @@ public class MathExam {
             default:
                 break;
             }
-            createTxt();
+            createTxt(FILENAME);
         } else {
             System.out.println(errMessage);
         }
@@ -242,9 +243,6 @@ public class MathExam {
         List<String> check2 = new ArrayList<String>();
         String checkRepeat = null;
         
-        strArrayQ = new ArrayList<String>();
-        strArrayA = new ArrayList<String>();
-        
         for (int i = 1; i <= num; i++) {
             fuhao = (int)(Math.random()*2);
             if (fuhao == 0) {
@@ -258,7 +256,7 @@ public class MathExam {
                 check2.add(number2 + "+" + number1);
                 result = number1 + number2;
                 // 记录题目和答案
-                strArrayQ.add("(" + i + ") " + number1 + " + " + number2 + " =");
+                strArrayQ.add("(" + i + ") " + number1 + " + " + number2);
                 strArrayA.add("(" + i + ") " + number1 + " + " + number2 + " = " + result);
             } else if (fuhao ==1) {
                 do {
@@ -270,7 +268,7 @@ public class MathExam {
                 check1.add(number1 + "-" + number2);
                 result = number1 - number2;
                 // 记录题目和答案
-                strArrayQ.add("(" + i + ") " + number1 + " - " + number2 + " =");
+                strArrayQ.add("(" + i + ") " + number1 + " - " + number2);
                 strArrayA.add("(" + i + ") " + number1 + " - " + number2 + " = " + result);
             }
         }
@@ -294,8 +292,6 @@ public class MathExam {
         List<String> check2 = new ArrayList<String>();
         String checkRepeat = null;
         
-        strArrayQ = new ArrayList<String>();
-        strArrayA = new ArrayList<String>();
         for (int i = 1; i <= num; i++) {
             fuhao = (int)(Math.random()*2);
             if (fuhao == 0) {
@@ -309,7 +305,7 @@ public class MathExam {
                 check2.add(number2 + "×" + number1);
                 result = number1 * number2;
                 // 记录题目和答案
-                strArrayQ.add("(" + i + ") " + number1 + " × " + number2 + " =");
+                strArrayQ.add("(" + i + ") " + number1 + " × " + number2);
                 strArrayA.add("(" + i + ") " + number1 + " × " + number2 + " = " + result);
             } else if (fuhao == 1) {
                 do {
@@ -322,7 +318,7 @@ public class MathExam {
                 result = number1 / number2;
                 yu = number1 % number2;
                 // 记录题目和答案
-                strArrayQ.add("(" + i + ") " + number1 + " ÷ " + number2 + " =");
+                strArrayQ.add("(" + i + ") " + number1 + " ÷ " + number2);
                 if (yu == 0) {
                     strArrayA.add("(" + i + ") " + number1 + " ÷ " + number2 + " = " + result);
                 } else {
@@ -352,8 +348,6 @@ public class MathExam {
         StringBuffer checkRepeat;
         Set<String> checkOper;
         
-        strArrayQ = new ArrayList<String>();
-        strArrayA = new ArrayList<String>();
         for (int j = 1; j <= num; j++) {
             shizi = "";
             List<String> exp;// 生成出来的中缀表达式
@@ -416,12 +410,12 @@ public class MathExam {
     
     
     /* 输出到out.txt文件 */
-    private static void createTxt() throws IOException {
+    private static void createTxt(String filename) throws IOException {
         /*
          * 1.创建指定文件名的文件
          * 2.依次向文件写入内容
          */
-        File file = new File(FILENAME);
+        File file = new File(filename);
         file.createNewFile();
         FileWriter fw = null;
         try {
