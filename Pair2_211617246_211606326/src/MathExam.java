@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.Stack;
+import java.util.regex.Pattern;
 
 public class MathExam {
     
@@ -445,13 +446,17 @@ public class MathExam {
     }
     
     /* 判断字符串是否为数字  */
+//    private static boolean isNumber(String s) {
+//        try {
+//            Integer.parseInt(s);
+//        } catch (NumberFormatException e) {
+//            return false;
+//        }
+//        return true;
+//    }
     private static boolean isNumber(String s) {
-        try {
-            Integer.parseInt(s);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-        return true;
+        Pattern pattern = Pattern.compile("-?[0-9]+(\\.[0-9]+)?");
+        return pattern.matcher(s).matches();
     }
     
     /* 比较两个运算符的优先级 */
