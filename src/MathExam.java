@@ -15,24 +15,25 @@ import java.util.regex.Pattern;
  */
 public class MathExam {
 	static OutputStream out = null;
-	static int sum = 0, remainder = 0;	
-	static String word = null;
-	public static void main(String[] args) {
+	static int sum = 0, remainder = 0;
+	static List<String> Word_Set = new ArrayList<String>();
+	public static int main(String[] args) {
 			File_Initialization();
-			int[] output = Input_Message(args);
-			Product_Problem_Answer(output[0], output[1]);
+			List<String> output = Input_Message(args);
+			Product_Problem_Answer(Integer.valueOf(output.get(0)), Integer.valueOf(output.get(1)));
+			return 0;
 	}
 	/**
 	 * 生成number个题目，并将题目写入文本文件
 	 * @return 
 	 * **/
 	public static boolean Product_Problem_Answer(int number, int grade) {
-		List<String> Calculation_Problem = new ArrayList<String>(),
-				Word_Set = new ArrayList<String>();
+		List<String> Calculation_Problem = new ArrayList<String>();
+		String word = null;
 		for (int i = 1; i <= number; i++) 
 		{
-			Iteration(i, grade, Word_Set);//生成一道合格的题目
-			File_Write_Problem(i, Calculation_Problem);//将这道题目写入文档
+			word = Iteration(grade);//生成一道合格的题目
+			File_Write_Problem(Calculation_Problem, "("+Integer.toString(i)+") "+word);//将这道题目写入文档
 			if(i == number)
 			{
 				File_Write_Answer(Calculation_Problem);//将所有题目的答案写入文档
@@ -52,19 +53,20 @@ public class MathExam {
 	 * 没有和子式重复，就进行子式存储并返回true，
 	 * 和子式重复就返回false
 	 * **/
-	public static boolean Judge_Repetition(int i, int cal_number1, int cal_number2, 
+	public static String Judge_Repetition(int cal_number1, int cal_number2, 
 			String[] str_symbol, int symbol, List<String> Word_Set) {
+		String word = Integer.toString(cal_number1)+str_symbol[symbol]+Integer.toString(cal_number2);
 		if(Word_Set.contains(word))
 		{
-			return false;
+			return null;
 		}
 		else
 		{
 			Word_Set.add(word);
 			if(str_symbol[symbol].equals("+") || str_symbol[symbol].equals("x"))
-				Word_Set.add(Integer.toString(cal_number2)+" "+str_symbol[symbol]+" "+Integer.toString(cal_number1));
-			word = "("+Integer.toString(i)+") "+word;
-			return true;
+				Word_Set.add(Integer.toString(cal_number2)+str_symbol[symbol]+Integer.toString(cal_number1));
+			word = Integer.toString(cal_number1)+" "+str_symbol[symbol]+" "+Integer.toString(cal_number2);
+			return word;
 		}
 	}
 	
@@ -79,25 +81,26 @@ public class MathExam {
 		经过查询，三年级混合运算结果还不能是小数,并且括号内的数字只有两个
 	 * 
 	 * **/
-	public static void Iteration(int i, int grade, List<String> Word_Set) {
+	public static String Iteration(int grade) {
 		Two_Numbers calc = new Two_Numbers();
 		Random ranNum = new Random();
 		int cal_number1 = 0, cal_number2 = 0, symbol;
 		String[] str_symbol = {"+","-","x","÷"};
+		String word = null;
 		if(grade == 1)
 		{
 			symbol = ranNum.nextInt(2);
 			cal_number1 = ranNum.nextInt(101);
 			cal_number2 = ranNum.nextInt(101);
 			if((sum = calc.Calculate_Two_Numbers(cal_number1, cal_number2, symbol, grade)) == -1)
-				Iteration(i, grade, Word_Set);
+				Iteration(grade);
 			word = Integer.toString(cal_number1)+" "+str_symbol[symbol]+" "+Integer.toString(cal_number2);
-			if(Judge_Repetition(i, cal_number1, cal_number2, str_symbol, symbol, Word_Set))
+			if(Judge_Repetition(cal_number1, cal_number2, str_symbol, symbol, Word_Set) == null)
 			{
-				Iteration(i, grade, Word_Set);
+				Iteration(grade);
 			}
 			else
-				return;
+				return Judge_Repetition(cal_number1, cal_number2, str_symbol, symbol, Word_Set);
 		}	
 		else if(grade == 2)
 		{	
@@ -105,16 +108,16 @@ public class MathExam {
 			cal_number1 = ranNum.nextInt(101);
 			cal_number2 = ranNum.nextInt(101);
 			if((sum = calc.Calculate_Two_Numbers(cal_number1, cal_number2, symbol, grade)) == -1)
-				Iteration(i, grade, Word_Set);
+				Iteration(grade);
 			if(str_symbol[symbol].equals("÷"))
 				remainder = calc.getRemainder();
 			word = Integer.toString(cal_number1)+" "+str_symbol[symbol]+" "+Integer.toString(cal_number2);
-			if(Judge_Repetition(i, cal_number1, cal_number2, str_symbol, symbol, Word_Set))
+			if(Judge_Repetition(cal_number1, cal_number2, str_symbol, symbol, Word_Set) == null)
 			{
-				Iteration(i, grade, Word_Set);
+				Iteration(grade);
 			}
 			else
-				return;
+				return Judge_Repetition(cal_number1, cal_number2, str_symbol, symbol, Word_Set);
 		}
 		else if(grade == 3)
 		{		
@@ -162,38 +165,38 @@ public class MathExam {
 				}
 				word = word+str_symbol[symbol]+Integer.toString(cal_number2);
 			}
-			Calculation calculation = new Calculation(word,Word_Set);
-			calculation.Infix_Expression_To_Word();
-			calculation.To_Suffix_Expression();
-			if(calculation.Suffix_Expression_Summation())
+			Calculation calculation = new Calculation(word, Word_Set);
+			calculation.Infix_Expression_To_Word(calculation.getInffix_expression());
+			calculation.To_Suffix_Expression(calculation.getInffix_expression());
+			if(calculation.Suffix_Expression_Summation(calculation.getSuffix_expression()))
 			{				
 				word = calculation.getword();
 				sum = calculation.getSum();
 				if(Word_Set.contains(word))
 				{
-					Iteration(i, grade, Word_Set);
+					Iteration(grade);
 				}
 				else
 				{
-					word = "("+i+") " + word;
 					Word_Set.add(word);
-					return;
+					return word;
 				}
 			}
 			else
-				Iteration(i, grade, Word_Set);
+				Iteration(grade);
 		}
+		return null;
 	}
 
 	/**
 	 	输入符合要求的信息
 	 * **/
-	public static int[] Input_Message(String[] args) {
+	public static List<String> Input_Message(String[] args) {
 		int j = 1, i = 1, number = -1, grade = -1;
 		Scanner input = new Scanner(System.in);
 		String check_input_message = null;
-		String[] input_args= {" "," "};
-		int[] output = {number,grade};
+		String[] input_args= {" ", " "};
+		List<String> output = new ArrayList<String>();
 		if(args[0].equals("-n") && args[2].equals("-grade"))
 		{	input_args[0] = args[1];input_args[1] = args[3];}
 		else if(args[0].equals("-grade") && args[2].equals("-n"))
@@ -204,6 +207,7 @@ public class MathExam {
 		{
 			if(j == 1 && i == 1)
 			{
+				
 				check_input_message = input_args[0];//题数
 				j++;
 			}	
@@ -214,7 +218,7 @@ public class MathExam {
 			}
 			else
 				check_input_message = input.nextLine();
-			if(!check_input_message.matches("[0-9]{,4}") && i == 1)
+			if(!check_input_message.matches("[0-9]{1,4}") && i == 1)
 			{	
 				System.out.print("输入的题数不合法！请重新输入题数(纯数字)：");
 			}
@@ -242,6 +246,8 @@ public class MathExam {
 					System.out.print("输入的年级不合法!请重新输入年级(1~3)：");
 			}
 		}
+		output.add(String.valueOf(number));
+		output.add(String.valueOf(grade));
 		return output;
 	}
 	
@@ -260,7 +266,7 @@ public class MathExam {
 		}
 	}
 
-	public static boolean File_Write_Problem(int i, List<String> Calculation_Problem) {
+	public static boolean File_Write_Problem(List<String> Calculation_Problem, String word) {
 		try {
 			out.write((word+"\r\n").getBytes());
 			if(remainder!=0)

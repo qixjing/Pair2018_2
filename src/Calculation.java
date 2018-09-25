@@ -9,12 +9,9 @@ public class Calculation {
 				Word_Set = new ArrayList<String>(),
 				cal_str = new ArrayList<String>(),
 				suffix_expression = new ArrayList<String>();
-	Stack<String> cal_symbol = new Stack<String>(),
-			      cal_sum = new Stack<String>();
 
-	public Calculation(String cal_problem,List<String> Word_Set) {
-		super();
-		this.Word_Set = Word_Set;
+	public Calculation(String cal_problem, List<String> word_Set) {
+		this.Word_Set = word_Set;
 		cal_str.add("+");
 		cal_str.add("-");
 		cal_str.add("x");
@@ -41,10 +38,12 @@ public class Calculation {
 
 	/**
 	 * 中缀表达式转后缀表达式
+	 * @return 
 	 *
 	 */
-	public void To_Suffix_Expression()
+	public List<String> To_Suffix_Expression(List<String> inffix_expression)
 	{
+		Stack<String> cal_symbol = new Stack<String>();
 		String str_char="";
 		for(int i = 0;i < inffix_expression.size();i++) {	
 			str_char = inffix_expression.get(i);
@@ -73,13 +72,13 @@ public class Calculation {
 		{
 			suffix_expression.add(cal_symbol.pop());
 		}
+		return suffix_expression;
 	}
 	
 	public boolean Oper(String str1, String str2) {
 		if(str1.equals("(") || str1 == null)
 			return false;
-		if((str1.equals("+") || str1.equals("-"))
-		&& (str2.equals("x") || str1.equals("÷")))
+		if(cal_str.indexOf(str1)/2 < cal_str.indexOf(str2)/2)
 			return false;
 		else 
 			return true;	
@@ -89,8 +88,9 @@ public class Calculation {
 	 * 后缀表达式（即逆波兰表达式）求和,并判断是否符合相对应的年级
 	 *
 	 */
-	public boolean Suffix_Expression_Summation()
+	public boolean Suffix_Expression_Summation(List<String> suffix_expression)
 	{
+		Stack<String> cal_sum = new Stack<String>();
 		Two_Numbers calc = new Two_Numbers();
 		for(int i = 0;i < suffix_expression.size();i++) {
 			if(suffix_expression.get(i).matches("\\d+"))
@@ -120,7 +120,7 @@ public class Calculation {
 				else if(suffix_expression.get(i).equals("÷"))
 				{
 					sum = num2/num1;
-					if(num2%num1 != 0)
+					if(num2 % num1 != 0)
 						return false;
 				}
 				if((sum = calc.Calculate_Two_Numbers(num2, num1, cal_str.indexOf(suffix_expression.get(i)), 3)) == -1
@@ -142,19 +142,35 @@ public class Calculation {
 	 * 中缀表达式（生成合格的中缀表达式）word
 	 *
 	 */
-	public void Infix_Expression_To_Word()
+	public String Infix_Expression_To_Word(List<String> inffix_expression)
 	{
 		for (int i = 0; i < inffix_expression.size(); i++) {
 			if(i == inffix_expression.size()-1)
 			{
 				word += inffix_expression.get(i);
-				return;
+				return word;
 			}
 			else
 			{
 				word += inffix_expression.get(i)+" ";
 			}
 		}
+		return null;
+	}
+	
+
+	/**
+	 * @return inffix_expression
+	 */
+	public List<String> getInffix_expression() {
+		return inffix_expression;
+	}
+
+	/**
+	 * @return suffix_expression
+	 */
+	public List<String> getSuffix_expression() {
+		return suffix_expression;
 	}
 	
 	/**

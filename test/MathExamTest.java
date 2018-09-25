@@ -1,52 +1,60 @@
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
 public class MathExamTest {
 
 	@Test
 	public void testMain() {
-		fail("尚未实现");
+		String[] args = {"100","3"};
+		assertEquals(0, new MathExam().main(args));
 	}
 
 	@Test
-	public void testOutput_Problem() {
-		fail("尚未实现");
-	}
-
-	@Test
-	public void testProduct_Problem() {
-		fail("尚未实现");
+	public void testProduct_Problem_Answer() {
+		assertEquals(true, new MathExam().Product_Problem_Answer(100, 3));	
+		assertEquals(false, new MathExam().Product_Problem_Answer(100, 0));	
 	}
 
 	@Test
 	public void testJudge_Repetition() {
-		fail("尚未实现");
+		String[] str_symbol= {"+","-","x","÷"};
+		List<String> Word_Set = new ArrayList<String>();
+		Word_Set.add("2x3");
+		assertEquals(null, new MathExam().Judge_Repetition(2, 3,str_symbol, 2, Word_Set));	
 	}
 
-	@Test
 	public void testIteration() {
-		fail("尚未实现");
+		assertEquals("123", new MathExam().Iteration(3));	
 	}
 
 	@Test
 	public void testInput_Message() {
-		fail("尚未实现");
+		String[] args = {"-n", "100", "-grade", "3"};
+		List<String> output = new ArrayList<String>();
+		output.add("100");
+		output.add("3");
+		assertEquals(output, new MathExam().Input_Message(args));	
 	}
 
 	@Test
 	public void testFile_Write_Answer() {
-		fail("尚未实现");
+		List<String> Calculation_Problem = new ArrayList<String>();
+		assertEquals(true, new MathExam().File_Write_Answer(Calculation_Problem));	
 	}
 
 	@Test
 	public void testFile_Write_Problem() {
-		fail("尚未实现");
+		List<String> Calculation_Problem = new ArrayList<String>();
+		assertEquals(true, new MathExam().File_Write_Problem(Calculation_Problem, "(123+123)x123"));	
 	}
 
 	@Test
 	public void testFile_Initialization() {
-		fail("尚未实现");
+		assertEquals(true, new MathExam().File_Initialization());	
 	}
 
 }

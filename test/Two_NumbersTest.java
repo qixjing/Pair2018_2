@@ -6,12 +6,13 @@ public class Two_NumbersTest {
 
 	@Test
 	public void testCalculate_Two_Numbers() {
-		fail("尚未实现");
+		assertEquals(9,new Two_Numbers().Calculate_Two_Numbers(3,3,2,3));
 	}
+
 
 	@Test
 	public void testGetRemainder() {
-		fail("尚未实现");
+		assertEquals(0,new Two_Numbers().getRemainder());
 	}
 
 }
