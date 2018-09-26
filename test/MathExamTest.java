@@ -1,5 +1,6 @@
 import static org.junit.Assert.*;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,26 +10,15 @@ public class MathExamTest {
 
 	@Test
 	public void testMain() {
-		String[] args = {"100","3"};
-		assertEquals(0, new MathExam().main(args));
+		String[] args = {"-n", "100", "-grade", "3"};
+		MathExam math = new MathExam();
+		math.main(args);
+		assertEquals(true, math.output_boolean);
 	}
 
 	@Test
 	public void testProduct_Problem_Answer() {
-		assertEquals(true, new MathExam().Product_Problem_Answer(100, 3));	
-		assertEquals(false, new MathExam().Product_Problem_Answer(100, 0));	
-	}
-
-	@Test
-	public void testJudge_Repetition() {
-		String[] str_symbol= {"+","-","x","¡Â"};
-		List<String> Word_Set = new ArrayList<String>();
-		Word_Set.add("2x3");
-		assertEquals(null, new MathExam().Judge_Repetition(2, 3,str_symbol, 2, Word_Set));	
-	}
-
-	public void testIteration() {
-		assertEquals("123", new MathExam().Iteration(3));	
+		assertEquals(true, new MathExam().Product_Problem_Answer(100, 3));
 	}
 
 	@Test
@@ -42,19 +32,24 @@ public class MathExamTest {
 
 	@Test
 	public void testFile_Write_Answer() {
+		MathExam math = new MathExam();
 		List<String> Calculation_Problem = new ArrayList<String>();
-		assertEquals(true, new MathExam().File_Write_Answer(Calculation_Problem));	
+		assertEquals(true, math.File_Write_Answer(Calculation_Problem));	
 	}
 
 	@Test
 	public void testFile_Write_Problem() {
+		MathExam math = new MathExam();
 		List<String> Calculation_Problem = new ArrayList<String>();
-		assertEquals(true, new MathExam().File_Write_Problem(Calculation_Problem, "(123+123)x123"));	
+		int sum = (123+123) * 123;
+		int remainder = 0;
+		Calculation_Problem.add("(123+123) * 123");
+		assertEquals(Calculation_Problem, math.File_Write_Problem(Calculation_Problem, sum, remainder, "(123+123)x123"));	
 	}
 
 	@Test
 	public void testFile_Initialization() {
-		assertEquals(true, new MathExam().File_Initialization());	
+		assertEquals(null, new MathExam().File_Initialization());	
 	}
 
 }

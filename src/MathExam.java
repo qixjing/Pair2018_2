@@ -15,13 +15,12 @@ import java.util.regex.Pattern;
  */
 public class MathExam {
 	static OutputStream out = null;
-	static int sum = 0, remainder = 0;
-	static List<String> Word_Set = new ArrayList<String>();
-	public static int main(String[] args) {
-			File_Initialization();
+	static boolean output_boolean = false;
+	public static void main(String[] args) {
+			File file = File_Initialization();
 			List<String> output = Input_Message(args);
 			Product_Problem_Answer(Integer.valueOf(output.get(0)), Integer.valueOf(output.get(1)));
-			return 0;
+			output_boolean = true;
 	}
 	/**
 	 * 生成number个题目，并将题目写入文本文件
@@ -30,10 +29,12 @@ public class MathExam {
 	public static boolean Product_Problem_Answer(int number, int grade) {
 		List<String> Calculation_Problem = new ArrayList<String>();
 		String word = null;
+		Two_Numbers calc = new Two_Numbers();
 		for (int i = 1; i <= number; i++) 
 		{
-			word = Iteration(grade);//生成一道合格的题目
-			File_Write_Problem(Calculation_Problem, "("+Integer.toString(i)+") "+word);//将这道题目写入文档
+			calc.setRemainder(0);
+			word = "("+Integer.toString(i)+") " + calc.Iteration(grade);//生成一道合格的题目
+			Calculation_Problem = File_Write_Problem(Calculation_Problem, calc.getSum(), calc.getRemainder(), word);//将这道题目写入文档
 			if(i == number)
 			{
 				File_Write_Answer(Calculation_Problem);//将所有题目的答案写入文档
@@ -48,145 +49,6 @@ public class MathExam {
 		return true;
 	}
 
-	/**
-	 * 判断子式是否重复，
-	 * 没有和子式重复，就进行子式存储并返回true，
-	 * 和子式重复就返回false
-	 * **/
-	public static String Judge_Repetition(int cal_number1, int cal_number2, 
-			String[] str_symbol, int symbol, List<String> Word_Set) {
-		String word = Integer.toString(cal_number1)+str_symbol[symbol]+Integer.toString(cal_number2);
-		if(Word_Set.contains(word))
-		{
-			return null;
-		}
-		else
-		{
-			Word_Set.add(word);
-			if(str_symbol[symbol].equals("+") || str_symbol[symbol].equals("x"))
-				Word_Set.add(Integer.toString(cal_number2)+str_symbol[symbol]+Integer.toString(cal_number1));
-			word = Integer.toString(cal_number1)+" "+str_symbol[symbol]+" "+Integer.toString(cal_number2);
-			return word;
-		}
-	}
-	
-	/**
-		小学三年级四则混合运算的要求如下：
-		运算符在2～4个
-		可以加括号
-		减法运算的结果不能有负数--还需要在逆波兰计算时仍有判断
-		除法运算除数不能为0，不能有余数
-		数字在0-1000以内，含端点
-		当然，为一年级、二年级出题的功能还是要保留
-		经过查询，三年级混合运算结果还不能是小数,并且括号内的数字只有两个
-	 * 
-	 * **/
-	public static String Iteration(int grade) {
-		Two_Numbers calc = new Two_Numbers();
-		Random ranNum = new Random();
-		int cal_number1 = 0, cal_number2 = 0, symbol;
-		String[] str_symbol = {"+","-","x","÷"};
-		String word = null;
-		if(grade == 1)
-		{
-			symbol = ranNum.nextInt(2);
-			cal_number1 = ranNum.nextInt(101);
-			cal_number2 = ranNum.nextInt(101);
-			if((sum = calc.Calculate_Two_Numbers(cal_number1, cal_number2, symbol, grade)) == -1)
-				Iteration(grade);
-			word = Integer.toString(cal_number1)+" "+str_symbol[symbol]+" "+Integer.toString(cal_number2);
-			if(Judge_Repetition(cal_number1, cal_number2, str_symbol, symbol, Word_Set) == null)
-			{
-				Iteration(grade);
-			}
-			else
-				return Judge_Repetition(cal_number1, cal_number2, str_symbol, symbol, Word_Set);
-		}	
-		else if(grade == 2)
-		{	
-			symbol = ranNum.nextInt(2) + 2;
-			cal_number1 = ranNum.nextInt(101);
-			cal_number2 = ranNum.nextInt(101);
-			if((sum = calc.Calculate_Two_Numbers(cal_number1, cal_number2, symbol, grade)) == -1)
-				Iteration(grade);
-			if(str_symbol[symbol].equals("÷"))
-				remainder = calc.getRemainder();
-			word = Integer.toString(cal_number1)+" "+str_symbol[symbol]+" "+Integer.toString(cal_number2);
-			if(Judge_Repetition(cal_number1, cal_number2, str_symbol, symbol, Word_Set) == null)
-			{
-				Iteration(grade);
-			}
-			else
-				return Judge_Repetition(cal_number1, cal_number2, str_symbol, symbol, Word_Set);
-		}
-		else if(grade == 3)
-		{		
-			int ran_left_parenthesis_num;
-			cal_number1 = ranNum.nextInt(1001);
-			int ran_symbol_num = ranNum.nextInt(3)+2;
-			word = Integer.toString(cal_number1);
-			for(int j = 1;j <= ran_symbol_num;j++)
-			{
-				cal_number1 = cal_number2;
-				cal_number2 = ranNum.nextInt(1001);
-				symbol = ranNum.nextInt(4);
-				ran_left_parenthesis_num = ranNum.nextInt(2);
-				if((sum = calc.Calculate_Two_Numbers(cal_number1, cal_number2, symbol, grade)) == -1
-					|| calc.getRemainder() != 0)
-				{
-					j--;
-					continue;
-				}
-				else if(ran_left_parenthesis_num % 2 == 1 && j <= ran_symbol_num-1)
-				{	
-					if(j == 1)
-					{
-						word = "(" + word;
-						symbol = ranNum.nextInt(2);
-						cal_number2 = ranNum.nextInt(1001);
-						word = word + str_symbol[symbol] + Integer.toString(cal_number2)+")";
-						symbol = ranNum.nextInt(2) + 2;
-						cal_number2 = ranNum.nextInt(1001);
-						word = word+str_symbol[symbol]+Integer.toString(cal_number2);
-					}
-					else if(j <= ran_symbol_num-1)
-					{
-						word = word + str_symbol[symbol] + "("+Integer.toString(cal_number2);
-						if(symbol == 0 || symbol == 1)
-							symbol = ranNum.nextInt(2);
-						else
-							symbol = ranNum.nextInt(4);
-						cal_number2 = ranNum.nextInt(1001);
-						word = word + str_symbol[symbol] + Integer.toString(cal_number2)+")";
-					}
-					j++;
-					ran_left_parenthesis_num = 0;
-					continue;
-				}
-				word = word+str_symbol[symbol]+Integer.toString(cal_number2);
-			}
-			Calculation calculation = new Calculation(word, Word_Set);
-			calculation.Infix_Expression_To_Word(calculation.getInffix_expression());
-			calculation.To_Suffix_Expression(calculation.getInffix_expression());
-			if(calculation.Suffix_Expression_Summation(calculation.getSuffix_expression()))
-			{				
-				word = calculation.getword();
-				sum = calculation.getSum();
-				if(Word_Set.contains(word))
-				{
-					Iteration(grade);
-				}
-				else
-				{
-					Word_Set.add(word);
-					return word;
-				}
-			}
-			else
-				Iteration(grade);
-		}
-		return null;
-	}
 
 	/**
 	 	输入符合要求的信息
@@ -195,7 +57,7 @@ public class MathExam {
 		int j = 1, i = 1, number = -1, grade = -1;
 		Scanner input = new Scanner(System.in);
 		String check_input_message = null;
-		String[] input_args= {" ", " "};
+		String[] input_args= {"", ""};
 		List<String> output = new ArrayList<String>();
 		if(args[0].equals("-n") && args[2].equals("-grade"))
 		{	input_args[0] = args[1];input_args[1] = args[3];}
@@ -242,7 +104,7 @@ public class MathExam {
 			else if(i == 2 && j != 1)
 			{
 				grade = Integer.parseInt(check_input_message);
-				if(grade<1 || grade>3)
+				if(grade < 1 || grade > 3)
 					System.out.print("输入的年级不合法!请重新输入年级(1~3)：");
 			}
 		}
@@ -266,32 +128,30 @@ public class MathExam {
 		}
 	}
 
-	public static boolean File_Write_Problem(List<String> Calculation_Problem, String word) {
+	public static List<String> File_Write_Problem(List<String> Calculation_Problem, int sum, int remainder, String word) {
 		try {
 			out.write((word+"\r\n").getBytes());
 			if(remainder!=0)
 			{
 				Calculation_Problem.add(word+" = "+Integer.toString(sum)+"..."+Integer.toString(remainder)+"\r\n");
-				remainder = 0;
 			}
 			else
 			{	
 				Calculation_Problem.add(word+" = "+Integer.toString(sum)+"\r\n");
 			}
-			word = "";
-			return true;
+			return Calculation_Problem;
 		} 
 		catch (IOException e) 
 		{
 			System.out.println("程序在out.write()时抛出异常"+e.getMessage());
-			return false;
+			return null;
 		}
 	}
 	/**
 	 * 生成文本文件
 	 * **/
-	public static boolean File_Initialization() {
-		String filename ="out.txt";	
+	public static File File_Initialization() {	
+		String filename ="out.txt";
 		File file = new File(filename);
 		if(!file.exists()) 
 		{		
@@ -304,18 +164,17 @@ public class MathExam {
 				file.createNewFile();
 			} catch (IOException e) {
 				System.out.println("程序在file.createNewFile()时抛出异常"+e.getMessage());
-				return false;
+				return null;
 			}
 			System.out.println("创建新文件："+file.getAbsolutePath());
 		}//获取绝对路径
 		try {
 			out = new FileOutputStream(file);
-			return true;
-		} 
-		catch (FileNotFoundException e) {
-			System.out.println("程序在new FileOutputStream(file)时抛出异常"+e.getMessage());
-			return false;
+		} catch (FileNotFoundException e) {
+			System.out.println("在new FileOutputStream(file)时抛出异常：" + e.getMessage());
 		}
+		return null;
 	}
+	
 
 }
