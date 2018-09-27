@@ -41,33 +41,45 @@ public class CalculationTest {
 
 	@Test
 	public void testOper() {
-		assertEquals(false, new Calculation("(123+123)x123", new ArrayList<String>()).Oper("+", "x"));
-		assertEquals(false, new Calculation("(123+123)x123", new ArrayList<String>()).Oper("+", "¡Â"));
-		assertEquals(true, new Calculation("(123+123)x123", new ArrayList<String>()).Oper("¡Â", "+"));
+		Calculation calc = new Calculation("(1+2)x3", new ArrayList<String>());
+		assertEquals(false, calc .Oper("", "x"));
+		assertEquals(false, calc .Oper("+", "¡Â"));
+		assertEquals(true, calc .Oper("¡Â", "+"));
 	}
 
 	@Test
 	public void testSuffix_Expression_Summation() {
-		List<String> Suffix_Expression = new ArrayList<String>();
-		Suffix_Expression.add("123");
-		Suffix_Expression.add("123");
-		Suffix_Expression.add("+");
-		Suffix_Expression.add("123");
-		Suffix_Expression.add("x");
-		assertEquals(false,new Calculation("(123+123)x123", new ArrayList<String>()).Suffix_Expression_Summation(Suffix_Expression));
+		List<String> Suffix_Expression1 = new ArrayList<String>();
+		Suffix_Expression1.add("123");
+		Suffix_Expression1.add("123");
+		Suffix_Expression1.add("+");
+		Suffix_Expression1.add("123");
+		Suffix_Expression1.add("x");
+		assertEquals(false,new Calculation("(123+123)x123", new ArrayList<String>()).Suffix_Expression_Summation(Suffix_Expression1));
+		List<String> Suffix_Expression2 = new ArrayList<String>();
+		Suffix_Expression2.add("12");
+		Suffix_Expression2.add("12");
+		Suffix_Expression2.add("+");
+		Suffix_Expression2.add("3");
+		Suffix_Expression2.add("x");
+		assertEquals(true,new Calculation("(12+12)x3", new ArrayList<String>()).Suffix_Expression_Summation(Suffix_Expression2));
+		
 	}
 
 	@Test
 	public void testInfix_Expression_To_Word() {
-		List<String> inffix_expression = new ArrayList<String>();
-		inffix_expression.add("(");
-		inffix_expression.add("123");
-		inffix_expression.add("+");
-		inffix_expression.add("123");
-		inffix_expression.add(")");
-		inffix_expression.add("x");
-		inffix_expression.add("123");
-		assertEquals("( 123 + 123 ) x 123",new Calculation("(123+123)x123", new ArrayList<String>()).Infix_Expression_To_Word(inffix_expression));
+		List<String> inffix_expression1 = new ArrayList<String>();
+		inffix_expression1.add("(");
+		inffix_expression1.add("123");
+		inffix_expression1.add("+");
+		inffix_expression1.add("123");
+		inffix_expression1.add(")");
+		inffix_expression1.add("x");
+		inffix_expression1.add("123");
+		assertEquals("( 123 + 123 ) x 123", new Calculation("(123+123)x123", new ArrayList<String>()).Infix_Expression_To_Word(inffix_expression1));
+		List<String> inffix_expression2 = new ArrayList<String>();
+		assertEquals(null, new Calculation("(123+123)x123", new ArrayList<String>()).Infix_Expression_To_Word(inffix_expression2));
+		
 	}
 
 	@Test

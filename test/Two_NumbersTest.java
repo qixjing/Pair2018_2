@@ -14,16 +14,34 @@ public class Two_NumbersTest {
 		Two_Numbers calc = new Two_Numbers();
 		Word_Set.add("2x3");
 		calc.setWord_Set(Word_Set);
+		String word = 2 + " x " + 3;
 		assertEquals(null, calc.Judge_Repetition(2, 3, "x"));	
+		assertEquals(word, new Two_Numbers().Judge_Repetition(2, 3, "x"));	
 	}
-
-	public void testIteration() {
-		assertEquals("123", new Two_Numbers().Iteration(3));	
+	
+	@Test
+	public void testIteration() {	
+		Two_Numbers three = new Two_Numbers();
+		three.Iteration(3);
+		assertEquals(false, three.getWord().isEmpty());	
+		
+		Two_Numbers two = new Two_Numbers();
+		two.Iteration(2);
+		assertEquals(false, two.getWord().isEmpty());
+		
+		Two_Numbers one = new Two_Numbers();
+		one.Iteration(1);
+		assertEquals(false, one.getWord().isEmpty());
 	}
 	
 	@Test
 	public void testCalculate_Two_Numbers() {
-		assertEquals(9, new Two_Numbers().Calculate_Two_Numbers(3,3,2,3));
+		assertEquals(6, new Two_Numbers().Calculate_Two_Numbers(3, 3, 0, 3));
+		assertEquals(0, new Two_Numbers().Calculate_Two_Numbers(3, 3, 1, 3));
+		assertEquals(9, new Two_Numbers().Calculate_Two_Numbers(3, 3, 2, 3));
+		assertEquals(1, new Two_Numbers().Calculate_Two_Numbers(3, 3, 3, 3));
+		assertEquals(-1, new Two_Numbers().Calculate_Two_Numbers(300, 300, 2, 3));
+		assertEquals(-1, new Two_Numbers().Calculate_Two_Numbers(-30, 30, 2, 3));
 	}
 
 	@Test
@@ -46,6 +64,11 @@ public class Two_NumbersTest {
 	@Test
 	public void testGetSum() {
 		assertEquals(0, new Two_Numbers().getSum());
+	}
+	
+	@Test
+	public void testGetWord() {
+		assertEquals("", new Two_Numbers().getWord());
 	}
 	
 	@Test

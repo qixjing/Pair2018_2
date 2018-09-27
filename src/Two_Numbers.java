@@ -6,8 +6,9 @@ public class Two_Numbers {
 	String[] str_symbol = {"+","-","x","÷"};
 	int remainder = 0;
 	int sum = 0;
+	String word = "";
 	List<String> Word_Set = new ArrayList<String>();
-	
+
 	/**
 	 * 计算两个数字
 	 * **/
@@ -15,9 +16,13 @@ public class Two_Numbers {
 		int upper_limit = 100, two_number_sum = 0;
 		if(grade == 3)
 			upper_limit = 1000;
-		if(str_symbol[symbol].equals("+") && cal_number1 + cal_number2 <= upper_limit)
+		if(str_symbol[symbol].equals("÷") && cal_number2 == 0)
+		{
+			return -1;
+		}
+		else if(str_symbol[symbol].equals("+") && cal_number1 + cal_number2 <= upper_limit)
 			two_number_sum = cal_number1 + cal_number2;
-		else if(str_symbol[symbol].equals("-")&& cal_number1 - cal_number2 >= 0)
+		else if(str_symbol[symbol].equals("-") && cal_number1 - cal_number2 >= 0)
 			two_number_sum = cal_number1 - cal_number2;
 		else if(str_symbol[symbol].equals("x") && cal_number1 * cal_number2 <= upper_limit)
 			two_number_sum = cal_number1 * cal_number2;
@@ -26,9 +31,9 @@ public class Two_Numbers {
 			two_number_sum = cal_number1 / cal_number2;
 			remainder = cal_number1 % cal_number2;
 		}
-		else if(two_number_sum < 0 || two_number_sum > 10000)
-			return -1;
 		else
+			return -1;
+		if(two_number_sum < 0 || two_number_sum > 10000)
 			return -1;
 		return two_number_sum;	
 	}
@@ -66,10 +71,9 @@ public class Two_Numbers {
 		经过查询，三年级混合运算结果还不能是小数,并且括号内的数字只有两个
 	 * 
 	 * **/
-	public String Iteration(int grade) {
+	public void Iteration(int grade) {
 		Random ranNum = new Random();
 		int cal_number1 = 0, cal_number2 = 0, symbol;
-		String word = "";
 		if(grade == 1)
 		{
 			symbol = ranNum.nextInt(2);
@@ -83,13 +87,15 @@ public class Two_Numbers {
 				Iteration(grade);
 			}
 			else
-				return word;
+				return ;
 		}	
 		else if(grade == 2)
 		{	
 			symbol = ranNum.nextInt(2) + 2;
 			cal_number1 = ranNum.nextInt(101);
 			cal_number2 = ranNum.nextInt(101);
+			if(str_symbol[symbol].equals("÷"))
+				cal_number2 = ranNum.nextInt(100) + 1;
 			if((sum = Calculate_Two_Numbers(cal_number1, cal_number2, symbol, grade)) == -1)
 				Iteration(grade);
 			if(str_symbol[symbol].equals("÷"))
@@ -100,11 +106,10 @@ public class Two_Numbers {
 				Iteration(grade);
 			}
 			else
-				return word;
+				return ;
 		}
-		else
+		else if(grade == 3)
 		{		
-			int ran_left_parenthesis_num;
 			cal_number1 = ranNum.nextInt(1001);
 			int ran_symbol_num = ranNum.nextInt(3)+2;
 			word = Integer.toString(cal_number1);
@@ -113,7 +118,7 @@ public class Two_Numbers {
 				cal_number1 = cal_number2;
 				cal_number2 = ranNum.nextInt(1001);
 				symbol = ranNum.nextInt(4);
-				ran_left_parenthesis_num = ranNum.nextInt(2);
+				int ran_left_parenthesis_num = ranNum.nextInt(2);
 				if(Calculate_Two_Numbers(cal_number1, cal_number2, symbol, grade) == -1
 					|| (str_symbol[symbol].equals("÷") && getRemainder() != 0))
 				{
@@ -155,12 +160,11 @@ public class Two_Numbers {
 			{				
 				word = calculation.getword();
 				sum = calculation.getSum();
-				return word;
+				return ;
 			}
 			else
 				Iteration(grade);
 		}
-		return null;
 	}
 	
 	/**
@@ -185,6 +189,13 @@ public class Two_Numbers {
 		return sum;
 	}
 
+	
+	/**
+	 * @return word
+	 */
+	public String getWord() {
+		return word;
+	}
 
 	/**
 	 * @param Remainder 要设置的 remainder

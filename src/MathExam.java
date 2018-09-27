@@ -17,7 +17,8 @@ public class MathExam {
 	static OutputStream out = null;
 	static boolean output_boolean = false;
 	public static void main(String[] args) {
-			File file = File_Initialization();
+			String filename ="out.txt";
+			File_Initialization(filename);
 			List<String> output = Input_Message(args);
 			Product_Problem_Answer(Integer.valueOf(output.get(0)), Integer.valueOf(output.get(1)));
 			output_boolean = true;
@@ -28,12 +29,15 @@ public class MathExam {
 	 * **/
 	public static boolean Product_Problem_Answer(int number, int grade) {
 		List<String> Calculation_Problem = new ArrayList<String>();
-		String word = null;
+		String word = "";
 		Two_Numbers calc = new Two_Numbers();
 		for (int i = 1; i <= number; i++) 
 		{
 			calc.setRemainder(0);
-			word = "("+Integer.toString(i)+") " + calc.Iteration(grade);//生成一道合格的题目
+			calc.Iteration(grade);
+			word = "("+Integer.toString(i)+") " + calc.getWord();//生成一道合格的题目
+			if(grade == 3)
+				calc.setRemainder(0);
 			Calculation_Problem = File_Write_Problem(Calculation_Problem, calc.getSum(), calc.getRemainder(), word);//将这道题目写入文档
 			if(i == number)
 			{
@@ -114,6 +118,8 @@ public class MathExam {
 	}
 	
 	public static boolean File_Write_Answer(List<String> Calculation_Problem) {
+		if(Calculation_Problem.size() == 0)
+			return false;
 		try {
 			out.write("\r\n".getBytes());
 			for (int i = 0; i < Calculation_Problem.size(); i++)
@@ -124,20 +130,22 @@ public class MathExam {
 		} 
 		catch (IOException e) {
 			System.out.println("程序在写入计算题答案时异常："+e.getMessage());
-			return false;
 		}
+		return false;
 	}
 
 	public static List<String> File_Write_Problem(List<String> Calculation_Problem, int sum, int remainder, String word) {
+		if(word.isEmpty())
+			return null;
 		try {
 			out.write((word+"\r\n").getBytes());
 			if(remainder!=0)
 			{
-				Calculation_Problem.add(word+" = "+Integer.toString(sum)+"..."+Integer.toString(remainder)+"\r\n");
+				Calculation_Problem.add(word + " = " + sum + "..." + Integer.toString(remainder) + "\r\n");
 			}
 			else
 			{	
-				Calculation_Problem.add(word+" = "+Integer.toString(sum)+"\r\n");
+				Calculation_Problem.add(word + " = " + sum + "\r\n");
 			}
 			return Calculation_Problem;
 		} 
@@ -150,16 +158,12 @@ public class MathExam {
 	/**
 	 * 生成文本文件
 	 * **/
-	public static File File_Initialization() {	
-		String filename ="out.txt";
+	public static File File_Initialization(String filename) {	
+		if(filename.isEmpty())
+			return null;
 		File file = new File(filename);
 		if(!file.exists()) 
 		{		
-			File parent = file.getParentFile();
-			if(parent !=null && !parent.exists())
-			{	parent.mkdir();//创建目录
-				System.out.println("创建目录："+parent);
-			}
 			try {
 				file.createNewFile();
 			} catch (IOException e) {
@@ -168,8 +172,10 @@ public class MathExam {
 			}
 			System.out.println("创建新文件："+file.getAbsolutePath());
 		}//获取绝对路径
+
 		try {
 			out = new FileOutputStream(file);
+			return file;
 		} catch (FileNotFoundException e) {
 			System.out.println("在new FileOutputStream(file)时抛出异常：" + e.getMessage());
 		}
