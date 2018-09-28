@@ -46,7 +46,8 @@ public class testPartInput{ // 参数输入的判断
 			{false,"-grade 0.1 -n 0.1"},
 			{false,"-n a1 -grade a1"},
 			{false,"a a a a"},
-			{false,"1 1 1 1"},
+			{false,"1 1 1 1"}
+			
 			
 		});
 	}
