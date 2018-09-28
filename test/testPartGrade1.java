@@ -1,15 +1,13 @@
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 
-class testPartGrade1 {
+public class testPartGrade1 {
 	// 测试一年级是否通过要求
 
 	@Test // 测试是否能正常产生一个一年级加法运算式子
-	void testAddOperation() { 
+	public void testAddOperation() { 
 		ArrayList<String> answerSet= new ArrayList<>();
 		@SuppressWarnings("unused")
 		AddOperation add=new AddOperation(answerSet, 3);
@@ -18,7 +16,7 @@ class testPartGrade1 {
 	}
 	
 	@Test // 测试能否正常产生一个一年级减法运算式子
-	void testSubtraction() { 
+	public void testSubtraction() { 
 		ArrayList<String> answerSet= new ArrayList<>();
 		@SuppressWarnings("unused")
 		Subtraction sub=new Subtraction(answerSet, 6);

@@ -1,12 +1,11 @@
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
 
+import org.junit.Test;
 
-import org.junit.jupiter.api.Test;
-
-class testPartArithemticSForStartP { // 测试Arithemitics中的startProblem能否产生正确的后缀表达式
+public class testPartArithemticSForStartP { // 测试Arithemitics中的startProblem能否产生正确的后缀表达式
 	
 	@Test
-	void testStartProblem() {
+	public void testStartProblem() {
 		
 		String[][] test=new String[][] { // 存储测试数据，及正确后缀表达式
 			{"-×+45+83+2515","( 15 + 25 ) - ( 3 + 8 ) × ( 5 + 4 )"},
@@ -30,7 +29,7 @@ class testPartArithemticSForStartP { // 测试Arithemitics中的startProblem能否产生
 			for(int j=0;j<as.postFixStack.size();j++) {
 				s1=s1+as.postFixStack.get(j);
 			}
-			//System.out.println("第"+(i+1)+"组数据："+s1.equals(test[i][0])); // 判断后缀表达式和正确结果是否相同			
+			System.out.println("第"+(i+1)+"组数据："+s1.equals(test[i][0])); // 判断后缀表达式和正确结果是否相同			
 			assertEquals(test[i][0], s1);// 判断后缀表达式和正确结果是否相同			
 		
 		}

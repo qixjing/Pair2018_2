@@ -1,13 +1,11 @@
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-class testPartGrade2 {
+public class testPartGrade2 {
 
 	@Test // 测试二年级乘法，能否产生符合要求的二年级乘法题目
-	void testMultiplication() {
+	public void testMultiplication() {
 		ArrayList<String> answerSet= new ArrayList<>();
 		@SuppressWarnings("unused")
 		Multiplication mul=new Multiplication(answerSet, 3);
@@ -17,7 +15,7 @@ class testPartGrade2 {
 	
 
 	@Test // 测试二年级乘法，能否产生符合要求的二年级除法题目
-	void testDivision() {
+	public void testDivision() {
 		ArrayList<String> answerSet= new ArrayList<>();
 		@SuppressWarnings("unused")
 		Division div=new Division(answerSet, 5);
