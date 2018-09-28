@@ -118,10 +118,12 @@ public class MathExam_2_6305 {
 	}
 	
 	public static void Grade_three(double n) {
-		String[][] str = new String[100][15];
 		String[] markStr =  {"+","-","x","÷"};
+		String[][] str = new String[100][11];
 		
 		for(int a = 0; a < n; a++) {
+			System.out.println(a+1);
+			System.out.println("nnnnnnnnnnnnnnnnnnnnnnnnn");
 			String[] markStrNumber = new String[5];
 			String[] number = new String[6];
 			
@@ -144,11 +146,11 @@ public class MathExam_2_6305 {
 				numberUsing[i] = number[i];
 			}
 			
-			for(int i = 0; i < 4; i++) {
+			for(int i = 0; i < markStrNumberUsing.length; i++) {
 				System.out.println(markStrNumberUsing[i]);
 			}
 			System.out.println("-------------------------------");
-			for(int i = 0; i < 5; i++) {
+			for(int i = 0; i < numberUsing.length; i++) {
 				System.out.println(numberUsing[i]);
 			}
 			System.out.println("-------------------------------");
@@ -161,7 +163,7 @@ public class MathExam_2_6305 {
 			
 			int bracketNow = bracketAmount;
 			System.out.println(bracketNow);
-			System.out.println("-------------------------------");
+			System.out.println("---------------()--------------");
 			int markNumInBracket = -1;
 			int markNo = -1;
 			double finalAns = 0;
@@ -181,21 +183,23 @@ public class MathExam_2_6305 {
 					
 					System.out.println(markNumInBracket);
 					System.out.println(markNo);
-					System.out.println("-------------------------------");
+					System.out.println("-------------!!!---------------");
 					String[] OpeMarkStrNumber = new String[markNumInBracket+1];
 					String[] OpeNumber = new String[markNumInBracket+2];
-					
-					for(int j = 0; j < markNumInBracket+1; j++) {
+					/*----------------------------------------------------*/
+					for(int j = 0; j < markNumInBracket; j++) {
 						OpeMarkStrNumber[j] = markStrNumberUsing[j+markNo-1];
 						markStrNumberUsing[j+markNo-1] = null;
-						System.out.print(OpeMarkStrNumber[j]);
+						System.out.println(OpeMarkStrNumber[j]);
 					}
 					
-					for(int j = 0; j < markNumInBracket+2; j++) {
+					for(int j = 0; j < markNumInBracket+1; j++) {
 						OpeNumber[j] = numberUsing[j+markNo-1];
 						numberUsing[j+markNo-1] = null;
 						System.out.println(OpeNumber[j]);
 					}
+					System.out.println("-------------!!!---------------");
+					
 					
 					double ansBracket = Operation(OpeMarkStrNumber, OpeNumber);
 					if(ansBracket == 0.1 || ansBracket > 1000) {
@@ -203,11 +207,25 @@ public class MathExam_2_6305 {
 						break;
 					}
 					System.out.println(ansBracket);
-					System.out.println("-------------------------------");
+					System.out.println(bracketNow);
+					System.out.println("--------------()()--------------");
 					numberUsing[markNo-1] = String.valueOf(ansBracket);
-					markStrNumberUsing = RemoveNull(markStrNumberUsing);
 					
+					markStrNumberUsing = RemoveNull(markStrNumberUsing);
 					numberUsing = RemoveNull(numberUsing);	
+					
+			/*		System.out.println("---------------null-----------------");
+					for(int u = 0; u < markStrNumberUsing.length; u++) {
+						System.out.println(markStrNumberUsing[u]);
+					}
+					System.out.println("----------------null----------------");
+					for(int u = 0; u < numberUsing.length; u++) {
+						System.out.println(numberUsing[u]);
+					}
+					System.out.println("---------------null----------------");*/
+					
+					
+					
 					
 				}else if(bracketNow == 0){
 					double ans = Operation(markStrNumberUsing, numberUsing);
@@ -217,6 +235,7 @@ public class MathExam_2_6305 {
 					}
 					finalAns = ans;
 					System.out.println(ans);
+					System.out.println("----");
 					break;
 				}
 			}
@@ -227,12 +246,11 @@ public class MathExam_2_6305 {
 			}
 			
 			//传入二维数组中
-			int whichUse = 0;
 			int mar = 0;
 			int num = 0;
 			
-			String[] strNow = new String[15];
-			for(int i = 0; i < 20; i++){
+			String[] strNow = new String[11];
+			for(int i = 0; i < 11; i++){
 				if(i%2 == 0 && number[num] != null) {
 					strNow[i] = number[num];
 					num++;
@@ -242,7 +260,8 @@ public class MathExam_2_6305 {
 				}
 			}
 			num = 0;
-			for(int i = 0; i < 15; i++){
+			
+			for(int i = 0; i < 11; i++){
 				if(i == (markNo-1)*2) {
 					str[a][i] = "(";
 				}else if(i == ((markNo-1)*2 + 2*markNumInBracket + 2)){
@@ -255,6 +274,10 @@ public class MathExam_2_6305 {
 					num++;
 				}
 			}
+			for(int i = 0; i < 11; i++){
+				System.out.println(str[0][i]);
+			}
+			
 		}
 
 		
@@ -265,9 +288,18 @@ public class MathExam_2_6305 {
 		while(true) {
 			int PMAmount = 0;
 			
-			for(int i = 0; i < OpeMarkStrNumber.length-1; i++) {
+			for(int i = 0; i < OpeMarkStrNumber.length; i++) {
 				
 				if(OpeMarkStrNumber[i] == "x") {
+				/*	System.out.println("---------------x-----------------");
+					for(int u = 0; u < OpeMarkStrNumber.length; u++) {
+						System.out.println(OpeMarkStrNumber[u]);
+					}
+					System.out.println("----------------x----------------");
+					for(int u = 0; u < OpeNumber.length; u++) {
+						System.out.println(OpeNumber[u]);
+					}
+					System.out.println("---------------x----------------");*/
 					
 					double ans = Double.parseDouble(OpeNumber[i]) * Double.parseDouble(OpeNumber[i+1]);
 					
@@ -281,7 +313,15 @@ public class MathExam_2_6305 {
 					break;
 					
 				}else if(OpeMarkStrNumber[i] == "÷") {
-					
+				/*	System.out.println("----------------÷----------------");
+					for(int u = 0; u < OpeMarkStrNumber.length; u++) {
+						System.out.println(OpeMarkStrNumber[u]);
+					}
+					System.out.println("----------------÷----------------");
+					for(int u = 0; u < OpeNumber.length; u++) {
+						System.out.println(OpeNumber[u]);
+					}
+					System.out.println("---------------÷---------------");*/
 					double ans = Double.parseDouble(OpeNumber[i]) / Double.parseDouble(OpeNumber[i+1]);
 					
 					if(ans != (int)ans) {
@@ -311,6 +351,18 @@ public class MathExam_2_6305 {
 		int PMmarkNo = 0;
 		double ans = Double.parseDouble(OpeNumber[0]) ;
 		while(true) {
+			
+		/*	System.out.println("++++++++++++++++++++");
+			for(int u = 0; u < OpeMarkStrNumber.length; u++) {
+				System.out.println(OpeMarkStrNumber[u]);
+			}
+			System.out.println("++++++++++++++++++++");
+			for(int u = 0; u < OpeNumber.length; u++) {
+				System.out.println(OpeNumber[u]);
+			}
+			System.out.println(PMmarkNo);
+			System.out.println("++++++++++++++++++++");*/
+			
 			if(OpeMarkStrNumber[PMmarkNo] == "+") {
 				ans = ans + Double.parseDouble(OpeNumber[PMmarkNo+1]);
 				PMmarkNo++;
@@ -328,13 +380,32 @@ public class MathExam_2_6305 {
 	
 	
 	public static String[] RemoveNull(String[] target) {
+		int nullAmount = 0;
 		for(int i = 0; i < target.length; i++) {
-			if(target[i] == null) {
-				for(int j = i; j < target.length; j++) {
-					if(j != target.length-1) {
-						target[j] = target[j+1];
-					}else {
-						target[j] = null;
+			if(target[i] != null) {
+				nullAmount++;
+			}
+		}
+		if(nullAmount > 0) {
+			for(int i = 0; i < target.length; i++) {
+				int number = 0;
+				if(target[i] == null) {
+					for(int j = i; j < target.length; j++) {
+						if(j != target.length-1) {
+							target[j] = target[j+1];
+						}else {
+							target[j] = null;
+						}
+					}
+					
+					for(int j = i; j < target.length; j++) {
+						if(target[j] != null) {
+							number++;
+						}
+					}
+					
+					if(number > 0) {
+						i--;
 					}
 				}
 			}
@@ -396,7 +467,7 @@ public class MathExam_2_6305 {
 				fos.write(")".getBytes());
 				int end = 0;
 				
-				for(int x = 0; x < 15; x++) {
+				for(int x = 0; x < 11; x++) {
 					if(str[i][x] == null)
 					{
 						end = x;
@@ -417,7 +488,7 @@ public class MathExam_2_6305 {
 				fos.write(")".getBytes());
 				
 				int end = 0;
-				for(int x = 0; x < 15; x++) {
+				for(int x = 0; x < 11; x++) {
 					if(str[i][x] == null)
 					{
 						end = x;
@@ -429,8 +500,9 @@ public class MathExam_2_6305 {
 					fos.write(str[i][j].getBytes());
 					fos.write("\b".getBytes());
 				}
+				int j = end-1;
 				fos.write("=\b".getBytes());
-				fos.write(str[i][end-1].getBytes());
+				fos.write(str[i][j].getBytes());
 				fos.write("\r\n".getBytes());
 			}
 			fos.close();
