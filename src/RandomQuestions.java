@@ -104,17 +104,8 @@ public class RandomQuestions extends Operation{
 
 			return problemSave;
 		
-		
-			
-			
-			
-			
-			
+					
 		}
-		
-		
-		
-		
 		
 		
 		

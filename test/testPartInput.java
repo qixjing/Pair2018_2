@@ -9,7 +9,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 @RunWith(Parameterized.class)
-public class testPartInput{
+public class testPartInput{ // 参数输入的判断
 
 	boolean expected=true;
 	String test;

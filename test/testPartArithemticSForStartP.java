@@ -7,11 +7,12 @@ public class testPartArithemticSForStartP { // ²âÊÔArithemiticsÖĞµÄstartProblemÄ
 	@Test
 	public void testStartProblem() {
 		
-		String[][] test=new String[][] { // ´æ´¢²âÊÔÊı¾İ£¬¼°ÕıÈ·ºó×º±í´ïÊ½
+		Object[][] test=new Object[][] { // ´æ´¢²âÊÔÊı¾İ£¬¼°ÕıÈ·ºó×º±í´ïÊ½
 			{"-¡Á+45+83+2515","( 15 + 25 ) - ( 3 + 8 ) ¡Á ( 5 + 4 )"},
 			{"¡Á-23¡Â415","15 ¡Â 4 ¡Á ( 3 - 2 )"},
 			{"¡Â4¡Á+232","2 ¡Á ( 3 + 2 ) ¡Â 4"},
 			{"+¡Â432","2 + 3 ¡Â 4"}
+			
 			/*
 			{"-¡Á+45+83+2515","( 15 + 25 ) - ( 3 + 8 ) ¡Á ( 5 + 4 )"},
 			{"¡Á-23¡Â415","15 ¡Â 4 ¡Á ( 3 - 2 )"},
@@ -25,7 +26,7 @@ public class testPartArithemticSForStartP { // ²âÊÔArithemiticsÖĞµÄstartProblemÄ
 		
 		for(int i=0;i<test.length;i++) {
 			s1="";
-			as.startProblem(test[i][1]);
+			as.startProblem((String)test[i][1]);
 			for(int j=0;j<as.postFixStack.size();j++) {
 				s1=s1+as.postFixStack.get(j);
 			}
