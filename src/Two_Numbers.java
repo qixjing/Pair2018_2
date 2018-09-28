@@ -140,9 +140,18 @@ public class Two_Numbers {
 					else if(j <= ran_symbol_num-1)
 					{
 						word += str_symbol[symbol] + "("+Integer.toString(cal_number2);
-						if(symbol == 0 || symbol == 1)
+						if(symbol == 0)
+							symbol = 1;
+						else if(symbol == 1)
 							symbol = ranNum.nextInt(2);
-						else
+						else if(symbol == 2)
+						{
+							while(symbol == 2)
+							{
+								symbol = ranNum.nextInt(4);
+							}
+						}
+						else if(symbol == 3)
 							symbol = ranNum.nextInt(4);
 						cal_number2 = ranNum.nextInt(1001);
 						word += str_symbol[symbol] + Integer.toString(cal_number2) + ")";
