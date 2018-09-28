@@ -2,7 +2,7 @@
 public class TaskMake {
 
 	//生成一年级题目
-	public void MakeGradeOne(int num) {
+	public String MakeGradeOne(int num) {
 		//文件操作类
 		File file = new File();
 		//调度场算法类
@@ -30,10 +30,11 @@ public class TaskMake {
 		}
 		System.out.println(Question + "\r\n" + Answer);
 		file.Write("out.txt", Question + "\r\n" + Answer);
+		return Question;
 	}
 	
 	//生成二年级题目
-	public void MakeGradeTwo(int num){
+	public String MakeGradeTwo(int num){
 		File file = new File();
 		ShuntingYard calc = new ShuntingYard();
 		String Question = "";
@@ -63,10 +64,11 @@ public class TaskMake {
 		}
 		System.out.println(Question + "\r\n" + Answer);
 		file.Write("out.txt", Question + "\r\n" + Answer);
+		return Question;
 	}
 	
 	//生成三年级题目
-	public void MakeGradeThree(int num) {
+	public String MakeGradeThree(int num) {
 		File file = new File();
 		ShuntingYard calc = new ShuntingYard();
 		String Question = "";
@@ -112,10 +114,11 @@ public class TaskMake {
 		}
 		System.out.println(Question + "\r\n" + Answer);
 		file.Write("out.txt", Question + "\r\n" + Answer);
+		return Question;
 	}
 	
 	//检查运算符
-	public static boolean CheckOperator(String Expression) {
+	public boolean CheckOperator(String Expression) {
 		char[] Array = Expression.toCharArray();
 		char Operator = '0';
 		for(int i = 0; i < Expression.length(); i++) {
@@ -141,19 +144,19 @@ public class TaskMake {
 	
 	// 取算式
 	// 如:1 + 2
-	public static String GetExpression(int one, int two, String Operator) {
+	public String GetExpression(int one, int two, String Operator) {
 		return String.valueOf(one) + " " + Operator + " " + String.valueOf(two);
 	}
 	
 	// 取序号
 	// 如:(1) 
 	// 注:有空格
-	public static String GetNumber(int n) {
+	public String GetNumber(int n) {
 		return "("+String.valueOf(n+1)+") ";
 	}
 	
 	// 取随机符号
-	public static String RandomOperator() {
+	public String RandomOperator() {
         switch(Random(0, 3)){
         case 0:{
         	return "+";
@@ -172,12 +175,12 @@ public class TaskMake {
 	}
 	
 	// 取随机数
-	public static int Random(int Min, int Max) {
+	public int Random(int Min, int Max) {
 		return (int) (Min + Math.random() * (Max - Min + 1));
 	}
 	
 	// 取随机逻辑值
-	public static boolean Random() {
+	public boolean Random() {
 		if((int) (0 + Math.random() * (1 - 0 + 1)) == 0) {
 			return true;
 		}else {
