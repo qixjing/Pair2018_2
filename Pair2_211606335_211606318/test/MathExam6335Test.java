@@ -117,7 +117,7 @@ public class MathExam6335Test {
 	public void testOutPut() {
 		String[] str = {"-n","5","-grade","2"};
 		MathExam6335 math = new MathExam6335(str);
-		assertEquals("true", String.valueOf(math.w3)); 
+		assertEquals("true", String.valueOf(math.w3));  
 	}
 	
 	@Test
@@ -155,7 +155,7 @@ public class MathExam6335Test {
 	@Test
 	public void testCalculation_true() {
 		assertEquals(1, new MathExam6335().Calculation(3, 2, "-"));
-		assertEquals(5, new MathExam6335().Calculation(3, 2, "+"));
+		assertEquals(5, new MathExam6335().Calculation(3, 2, "+")); 
 		assertEquals(6, new MathExam6335().Calculation(3, 2, "¡Á"));
 		assertEquals(0, new MathExam6335().Calculation(0, 2, "¡Á"));
 		assertEquals(1, new MathExam6335().Calculation(3, 2, "¡Â"));
@@ -166,19 +166,30 @@ public class MathExam6335Test {
 	@Test
 	public void testCalculation_false() {
 		assertEquals(-2, new MathExam6335().Calculation(3, 5, "-"));
-		assertEquals(-1, new MathExam6335().Calculation(3, 0, "¡Â"));
+		assertEquals(-1, new MathExam6335().Calculation(3, 0, "¡Â")); 
 	}
 
 
 	@Test
-	public void testToPostfixExpression() {
+	public void testToPostfixExpression_0() {
 		MathExam6335 math = new MathExam6335();
 		String str = "32+5+4-";
-//		assertEquals("325+¡Á4-",math.toPostfixExpression("3¡Á(2+5)-4"));
 		assertEquals(str,math.toPostfixExpression("3+2+5-4"));
 	}
 
-
+	@Test
+	public void testToPostfixExpression_1() {
+		MathExam6335 math = new MathExam6335();
+		String str = "3025+¡Á4-";
+		assertEquals(str,math.toPostfixExpression("30¡Á(2+5)-4"));
+	}
+	
+	@Test
+	public void testreversePolish() {
+		String[] str = {"-n","5","-grade","2"};
+		MathExam6335 math = new MathExam6335(str);
+		assertEquals("false",String.valueOf(math.w4));
+	}
 
 	@Test
 	public void testAdd() {

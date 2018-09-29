@@ -46,6 +46,7 @@ public class MathExam6335 {
 	public boolean w1 = true;
 	public boolean w2 = true;
 	public boolean w3 = false;
+	public boolean w4 = false;
 	boolean calflag = true;  //返回一个布尔类型，控制题目规范
 	
 	//调度场和逆波兰函数定义
@@ -126,7 +127,7 @@ public class MathExam6335 {
 				file.createNewFile();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				System.out.println("文件创建时出现错误! 即将退出程序....");
+				System.out.println("文件创建时出现错误! 即将退出程序...."); 
 			}
 		}
 		
@@ -311,6 +312,7 @@ public class MathExam6335 {
 		}
 		
 		if(calflag) {	//控制题目规格化
+			w4 = false;
 			return postfixNumber.pop();
 		}else {
 			calflag = true;
@@ -407,7 +409,7 @@ public class MathExam6335 {
 					}
 				} else if(positionSub > 0 && parentheses == 0) {	//匹配到表达式中有减号操作符，且括弧为添加状态
 					if(add.charAt(positionSub+2) >= '0' && add.charAt(positionSub+2) <= '9') {
-						int a = positionSub+2;
+						int a = positionSub+2; 
 						do {
 							a++;
 						}while(add.charAt(a) >= '0' && add.charAt(a) <= '9');
