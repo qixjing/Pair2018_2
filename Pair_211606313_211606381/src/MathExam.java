@@ -26,7 +26,8 @@ public class MathExam {
 		mp.put('÷',2);
 	}
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args){
+//		System.out.println(errorMessage);
 		if(judgmentParameter(args)) {
 			int len = Integer.parseInt(args["-n".equals(args[0]) ? 1 : 3]);
 			grade = Integer.parseInt(args["-n".equals(args[0]) ? 3 : 1]);
@@ -42,7 +43,7 @@ public class MathExam {
 					try {
 			        	topic[i].append("(" + (i+1) + ")");
 			        	standAnswer[i].append("(" + (i+1) + ")");
-			        	int res = CalPoland(infixExpression,i);
+			        	int res = calPoland(infixExpression,i);
 			        	topic[i].append(System.lineSeparator());
 			        	standAnswer[i].append(" = " + res);
 			        	if(i != len - 1){
@@ -61,7 +62,6 @@ public class MathExam {
 			try {
 				write("out.txt");
 			} catch (IOException e) {
-				e.printStackTrace();
 			}
 			System.out.println("小学" + grade + "年级数学题题目已生成，请查看out.txt文件");
 		}else {
@@ -75,11 +75,12 @@ public class MathExam {
 	 * @return     当符合要求时返回 true，否则返回false
 	 */
 	static boolean judgmentParameter(String[] args) {
-		if(args.length < 4 || args.length > 4) {
+		if(args.length < 4 || args.length > 4) { 
 			return false;
 		}else {
-			// 1  判断是否是用 -n ， -grade 标识
-			if(!(("-n".equals(args[0]) && "-grade".equals(args[2]) )|| ("-grade".equals(args[0]) && "-n".equals(args[2])))) {
+			// 1  判断是否是用 -n ， -grade 标识 "-n", "1000","2","-grade"
+			if(!(("-n".equals(args[0]) && "-grade".equals(args[2]))|| ("-grade".equals(args[0]) && "-n".equals(args[2])))) {
+
 				return false;
 			}
 			
@@ -106,7 +107,7 @@ public class MathExam {
 			if (!matches2) {
 				errorMessage = "目前只支持1~3年级，请重新运行，输入1~3中的一个数字";
 				return false;
-			}	    
+			}    
 		}
 		return true;
 	}
@@ -116,6 +117,7 @@ public class MathExam {
 	 * @param len 用户要求生成的题目数量
 	 * @param grade 年级
 	 */
+
 	static void generatingTopicTwo(int len,int grade) {
 		for (int i = 0; i < len; i++) {
 			// 获取两个随机数，num1,num2表示参与计算的两个数字;
@@ -275,20 +277,13 @@ public class MathExam {
 	 * @return 返回计算结果
 	 * @throws Exception 当表达式计算过程中出错时抛出异常
 	 */
-	static int CalPoland(Character infix[],int n) throws Exception{
+	static int calPoland(Character infix[],int n) throws ArithmeticException{
 		ArrayList<Character> chlist = new ArrayList<Character>();
 		for (Character ch : infix) {
 			if(ch != null) {
 				chlist.add(ch);
 			}
 		}
-		Character[] str = new Character[chlist.size()];
-//		System.out.println(chlist.toArray());
-		for (int i =0 ;i<str.length;i++) {
-			str[i] = chlist.get(i);
-		}
-//		System.out.println();
-//		 = (Character[])chlist.toArray();
 		
 		Stack<Object> s = new Stack<Object>();
 		Stack<String> tops = new Stack<String>();
@@ -309,7 +304,6 @@ public class MathExam {
 					tops.pop();
 				}
 				s.pop();
-				
 				if(s.peek() instanceof Character) {
 					b = 1 + (int) (Math.random() * 100);
 					str2 = " " + b;
@@ -319,7 +313,7 @@ public class MathExam {
 					tops.pop();
 				}
 				s.pop();
-				
+				 
 				switch(infix[i])
 				{
 					case '+':
@@ -341,8 +335,8 @@ public class MathExam {
 						s.push(b * a);
 						break;
 					case '÷':
-						if(b % a != 0) {
-							throw new Exception();
+						if(b % a != 0 || a == 0) {
+							throw new ArithmeticException();
 						}
 						s.push(b / a);
 						break;
@@ -350,12 +344,12 @@ public class MathExam {
 //				System.out.println(s.peek());
 				tops.push(str2 + " " + infix[i] + str1);
 				int j;
-				for(j = k;j<str.length;j++) {
-					if(mp.get(infix[i]) < mp.get(str[k].charValue())||(mp.get(infix[i]) == mp.get(str[k].charValue()) && str[k].charValue() == '-')) {
+				for(j = k;j<chlist.size();j++) {
+					if(mp.get(infix[i]) < mp.get(chlist.get(k).charValue())||(mp.get(infix[i]) == mp.get(chlist.get(k).charValue()) && chlist.get(k).charValue() == '-')) {
 						break;
 					}
 				}
-				if(j<str.length) {
+				if(j<chlist.size()) {
 					String s1 = tops.pop();
 					tops.push(" (" + s1 + " )");
 				}
@@ -365,7 +359,7 @@ public class MathExam {
 		topic[n].append(tops.peek());
 		standAnswer[n].append(tops.pop());
 //		System.out.println(s.peek());
-		return (int) s.pop();
+		return ((Integer) s.pop()).intValue();
 	}
 	
 	/**
@@ -380,7 +374,6 @@ public class MathExam {
 		File parentFile = file.getParentFile();
 		if (parentFile != null && !parentFile.exists()) {
 			parentFile.mkdirs();
-			System.out.println("创建目录：" + parentFile);
 		}
 		file.createNewFile();
 		// 步骤2：创建指向文件的输出流
