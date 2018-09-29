@@ -71,7 +71,7 @@ class MathExam6356Test {
 	void testGradeTwo() {
 		// 测试二年级生成数组
 		MathExam6356.setN(11);
-		MathExam6356.gradeOne();
+		MathExam6356.gradeTwo();
 		assertEquals(11, MathExam6356.question.length);
 		assertEquals(11, MathExam6356.answer.length);
 	}
