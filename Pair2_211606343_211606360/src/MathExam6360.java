@@ -226,7 +226,7 @@ public class MathExam6360 {
 	}
 	
 	public static int  calculate_3(int count) {
-	     int i=0;
+	    int i=0;
 	    while(i<count){
 	 
 	    	int symbol_number=(int)(Math.random()*5+2);   //随机生成数字，用于判断符号个数
@@ -408,7 +408,11 @@ public class MathExam6360 {
 	                s.push("" + result);
 	            }
 	        }
-	        return s.pop();
+	        if(Integer.parseInt(s.peek()) > 1000) {
+	        	return "false";
+	        }
+	        else
+	        {return s.pop();}
 	    }
 	 
 	public static void main(String args[]) {
