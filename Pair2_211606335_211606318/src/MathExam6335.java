@@ -45,6 +45,7 @@ public class MathExam6335 {
 	public static int count;	
 	public boolean w1 = true;
 	public boolean w2 = true;
+	public boolean w3 = false;
 	boolean calflag = true;  //返回一个布尔类型，控制题目规范
 	
 	//调度场和逆波兰函数定义
@@ -149,7 +150,8 @@ public class MathExam6335 {
 			}
 			fos.flush();
 			fos.close();	//关闭文件输出流
-		
+			
+			w3 = true;
 			System.out.print("-------  本次共生成" + count + "道小学"+ grade + "年级算数题，请打开out.txt文件查看详情    -------"); 	
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

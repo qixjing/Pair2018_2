@@ -113,10 +113,16 @@ public class MathExam6335Test {
 		assertEquals("false", String.valueOf(math.w2)); 
 	}
 
-
+	@Test
+	public void testOutPut() {
+		String[] str = {"-n","5","-grade","2"};
+		MathExam6335 math = new MathExam6335(str);
+		assertEquals("true", String.valueOf(math.w3)); 
+	}
+	
 	@Test
 	public void testIsOperator_true() {
-		assertEquals(true, new MathExam6335().isOperator("+"));
+		assertEquals(true, new MathExam6335().isOperator("+")); 
 		assertEquals(true, new MathExam6335().isOperator("-"));
 		assertEquals(true, new MathExam6335().isOperator("¡Á"));
 		assertEquals(true, new MathExam6335().isOperator("¡Â")); 
