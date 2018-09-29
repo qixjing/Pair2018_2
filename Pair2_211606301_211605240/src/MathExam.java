@@ -218,6 +218,7 @@ public class MathExam {
 		}
 		n=str1[1];
 		grade=str1[2];
+		grade(n,grade);	
 	}
 
 }
