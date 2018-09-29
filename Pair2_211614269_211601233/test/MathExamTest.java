@@ -59,10 +59,28 @@ public class MathExamTest {
 	public void testMathThr() {
 		fail("Not yet implemented");
 	}
-
+*/
 	@Test
 	public void testMain() {
-		fail("Not yet implemented");
-	}*/
+		String[] a=new String[] {"-n","50","-grade","3"};
+		String[] b=new String[] {"-n","50","-grade","2"};
+		String[] c=new String[] {"-n","50","-grade","1"};
+		String[] d=new String[] {"-nn","50","-grade","3"};
+		String[] e=new String[] {"-n","50","-gg","3"};
+		String[] f=new String[] {"-grade","3","-n","50"};
+		MathExam.main(a);
+		assertEquals(true, MathExam.checkInput(a));
+		MathExam.main(b);
+		assertEquals(true, MathExam.checkInput(b));
+		MathExam.main(c);
+		assertEquals(true, MathExam.checkInput(c));
+		MathExam.main(d);
+	    assertEquals(false, MathExam.checkInput(d));
+	    MathExam.main(e);
+		assertEquals(false, MathExam.checkInput(e));
+		MathExam.main(f);
+		assertEquals(true, MathExam.checkInput(f));
+		
+	}
 
 }
