@@ -61,6 +61,48 @@ public class MathExam {
 		return true;
 	}
 
+	// 判断输入参数是否合法
+	public static boolean checkInput(String args[]) {
+		if (args.length != 4) {
+			return false;
+		} else {
+			if (args[0].equals("-n") && args[2].equals("-grade") || args[0].equals("-grade") && args[2].equals("-n")) {
+				if (args[0].equals("-n")) {
+					// 限定题数为0-999
+					if (isNum(args[1]) && args[1].length() <= 3 && isNum(args[3]) && args[3].length() == 1
+							&& Integer.parseInt(args[3]) > 0 && Integer.parseInt(args[3]) <= 3) {
+						return true;
+					} else {
+						return false;
+					}
+				} else {
+					if (isNum(args[3]) && args[3].length() <= 3 && isNum(args[1]) && args[1].length() == 1
+							&& Integer.parseInt(args[1]) > 0 && Integer.parseInt(args[1]) <= 3) {
+						return true;
+					} else {
+						return false;
+					}
+				}
+			} else {
+				return false;
+			}
+		}
+	}
+
+	// 从输入参数中提取题数及年级
+	public static int[] inform(String args[]) {
+		// a[0]存放年级 a[1]存放题数
+		int[] a = new int[2];
+		if (args[0].equals("-n")) {
+			a[0] = Integer.parseInt(args[3]);
+			a[1] = Integer.parseInt(args[1]);
+		} else {
+			a[0] = Integer.parseInt(args[1]);
+			a[1] = Integer.parseInt(args[3]);
+		}
+		return a;
+	}
+
 	public static void mathOne(int n) {
 		// 带题号的题目
 		String prob;
@@ -116,7 +158,7 @@ public class MathExam {
 					System.out.println("写入错误!");
 				}
 			}
-			String fg = "-----------------标准答案-----------------" + "\r\n";
+			String fg = " " + "\r\n";
 			data = fg.getBytes();
 			try {
 				out.write(data);
@@ -203,7 +245,7 @@ public class MathExam {
 					System.out.println("写入错误!");
 				}
 			}
-			String fg = "-----------------标准答案-----------------" + "\r\n";
+			String fg = " " + "\r\n";
 			data = fg.getBytes();
 			try {
 				out.write(data);
@@ -323,23 +365,7 @@ public class MathExam {
 					}
 				}
 			}
-			/*
-			 * // 随机是否出括号 int kh = (int) (1 + Math.random() * (2 - 1 + 1)); if (kh == 1) {
-			 * for (int i = 1; i < pro.size() - 1; i += 2) { if ((pro.get(i).equals("+") ||
-			 * pro.get(i).equals("-")) && i + 2 < (pro.size() - 1) && (pro.get(i +
-			 * 2).equals("*") || pro.get(i + 2).equals("/"))) { pro.add(i - 1, "(");
-			 * pro.add(i + 3, ")"); break;
-			 * 
-			 * for(int k=pro.size()-3;k>=i-1;k--) { pro.set(k+1, pro.get(k)); } pro.set(i-1,
-			 * "(");
-			 * 
-			 * // 添加右括号
-			 * 
-			 * str1=pro.get(pro.size()-1); pro.add(str1); for(int k=pro.size()-3;k>=i+3;k--)
-			 * { pro.set(k+1, pro.get(k)); } pro.set(i+3, ")");
-			 * 
-			 * } } }
-			 */
+
 			// 将被拆分的题目转成不带题号的字符串
 			for (String str : pro) {
 				prob1 += str;
@@ -418,41 +444,17 @@ public class MathExam {
 	}
 
 	public static void main(String[] args) {
-		if (args.length != 4) {
-			System.out.println("输入错误");
-		} else {
-			if (args[0].equals("-n") && args[2].equals("-grade") || args[0].equals("-grade") && args[2].equals("-n")) {
-				if (args[0].equals("-n")) {
-					// 限定题数为0-999
-					if (isNum(args[1]) && args[1].length() <= 3 && isNum(args[3]) && args[3].length() == 1
-							&& Integer.parseInt(args[3]) > 0 && Integer.parseInt(args[3]) <= 3) {
-						if (args[3].equals("1")) {
-							mathOne(Integer.parseInt(args[1]));
-						} else if (args[3].equals("2")) {
-							mathTwo(Integer.parseInt(args[1]));
-						} else {
-							mathThr(Integer.parseInt(args[1]));
-						}
-					} else {
-						System.out.println("输入错误");
-					}
-				} else {
-					if (isNum(args[3]) && args[3].length() <= 3 && isNum(args[1]) && args[1].length() == 1
-							&& Integer.parseInt(args[1]) > 0 && Integer.parseInt(args[1]) <= 3) {
-						if (args[1].equals("1")) {
-							mathOne(Integer.parseInt(args[3]));
-						} else if (args[1].equals("2")) {
-							mathTwo(Integer.parseInt(args[3]));
-						} else {
-							mathThr(Integer.parseInt(args[3]));
-						}
-					} else {
-						System.out.println("输入错误");
-					}
-				}
+		if (checkInput(args)) {
+			int[] a = inform(args);
+			if (a[0] == 1) {
+				mathOne(a[1]);
+			} else if (a[0] == 2) {
+				mathTwo(a[1]);
 			} else {
-				System.out.println("输入错误");
+				mathThr(a[1]);
 			}
+		} else {
+			System.out.println("输入有误,请重新输入");
 		}
 
 	}
