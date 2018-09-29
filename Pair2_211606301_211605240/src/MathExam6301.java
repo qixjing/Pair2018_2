@@ -11,53 +11,40 @@ import java.util.Scanner;
 public class MathExam6301 {
 	static OutputStream out;
 	static int i=0,a,b;
+	static int[] intArray1=new int[1000];
+	static int[] intArray=new int[1000];
+	static String word;
 	
-	public static int multiplication(int i) {
+
+	public static int multiplication() {
 		a=(int) (Math.random()*10);
 		b=(int) (Math.random()*10);
-		String word=("("+(i+1)+") "+a +" x "+ b +" = ")+"\n";
-		try {
-			out.write(word.getBytes());
-		} catch (IOException e) {
-		}
+		 word=("("+(i+1)+") "+a +" x "+ b +" = ")+"\n";
 		return a*b;
 		
 	}
-	public static void division(int i,int intArray[],int intArray1[]) {
+	public static int division() {
 		a =(int) (Math.random()*100);
 		b =(int) (1+Math.random()*9);
-		String word=("("+(i+1)+") "+a +" ÷ "+ b +" = ")+"\n";
-		try {
-			out.write(word.getBytes());
-		} catch (IOException e) {
-		}
-		intArray[i]=a/b;
+		word=("("+(i+1)+") "+a +" ÷ "+ b +" = ")+"\n";
 		intArray1[i]=a%b;
+		return a/b;
+		
 		
 	}
-	public static int addition(int i) {
-		a =(int) (Math.random()*100);
-		 b =(int) (Math.random()*(100-a+1));
-		String word=("("+(i+1)+") "+ a +" + "+ b +" = ")+"\n";
-		try {
-			out.write(word.getBytes());
-		} catch (IOException e) {
-		}
+	public static int addition() {
+		a=(int)(Math.random()*100);
+		b=(int)(Math.random()*(100-a+1));
+		word=("("+(i+1)+") "+ a +" + "+ b +" = ")+"\n";
 		return a+b;
 	}
-	public static int subtraction (int i){
-		a =(int) (Math.random()*100);
-		b =(int) (Math.random()*(a+1));
-		String word=("("+(i+1)+") "+a +" - "+ b +" = ")+"\n";
-		try {
-			out.write(word.getBytes());
-		} catch (IOException e) {
-		}
+	public static int subtraction (){
+		a=(int)(Math.random()*100);
+		b=(int)(Math.random()*(a+1));
+		word=("("+(i+1)+") "+a +" - "+ b +" = ")+"\n";
 		return a-b;
 	}
 	public static void math(int n,int grade){
-		int intArray[] = new int[n];
-		int intArray1[] = new int[n];
 		String filename="out";
 		  File file = new File(filename+".txt"); 
 		try {
@@ -66,17 +53,21 @@ public class MathExam6301 {
 		{	
 				int k=(int) (Math.random()*2);
 			if (k==0 && grade==1) {//进行加法计算
-				intArray[i]=addition(i);
+				intArray[i]=addition();
 		}
 			if(k==1 && grade==1){//进行减法计算
-			intArray[i]=subtraction(i);
+			intArray[i]=subtraction();
 		}
 			if(k==0 && grade==2) {
-			intArray[i]=multiplication(i);
+			intArray[i]=multiplication();
 		}
 			if(k==1 && grade==2){
-			division(i,intArray,intArray1);
-		}	
+			intArray[i]=division();
+		}//标记
+			try {
+				out.write(word.getBytes());
+			} catch (IOException e) {
+			}
 	}
 			 String word ="\n";
 			  out.write(word.getBytes());
@@ -98,4 +89,7 @@ public class MathExam6301 {
 		}
 
 	}
+//	public static void main(String[] args){
+//		math(10,2);
+//	}
 	}

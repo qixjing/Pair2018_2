@@ -12,9 +12,10 @@ import org.junit.runners.Parameterized.Parameters;
 @RunWith(Parameterized.class)
 public class MathExamTest {
 	int expected=0;
-	int sum;
+	int sum,c;
 	int answer=0;
 	boolean expected1=true;
+	int shabi;
 	
 	static String[] args = new String[10];
 	static int[] str = new int[3];
@@ -22,6 +23,7 @@ public class MathExamTest {
 	static Collection<String> list=new HashSet<String>();
 	
 	MathExam math = new MathExam();
+	MathExam6301 math1 = new MathExam6301();
 	
 	@Parameters
 	public static Collection<Object[]> t(){
@@ -31,20 +33,20 @@ public class MathExamTest {
 		String[] in = new String[] {"-n","10","-grade","2"};
 		String[] in1 = new String[] {"-grade","3","-n","10"};
 		String[] in2 = new String[] {"-n","10000","-grade","1"};
-		String[] in3 = new String[] {"-n","10","-grade"};
+		String[] in3 = new String[] {"10","2"};
 		String[] in4 = new String[] {"-n","10","-grade","10"};
 		String[] in5 = new String[] {"-n","asdas","-grade","dfdf"};
 		return Arrays.asList(new Object[][]{
-			{1,in,str,true,str1,5,list},
-			{1,in1,str,false,str1,5,list},
-			{0,in2,str,true,str1,6,list},
-			{0,in3,str,true,str2,5,list},
-			{0,in4,str,false,str3,5,list},
-			{0,in5,str,false,str3,6,list}
+			{1,in,str,true,str1,5,list,1},
+			{1,in1,str,false,str1,5,list,2},
+			{0,in2,str,true,str1,6,list,3},
+			{0,in3,str,true,str2,5,list,4},
+			{0,in4,str,false,str3,5,list,5},
+			{0,in5,str,false,str3,6,list,6}
 		});
 		}
 	
-	public MathExamTest(int expected,String[]str2,int[] str,boolean expected1,int[]str1,int answer,Collection<String> list) {
+	public MathExamTest(int expected,String[]str2,int[] str,boolean expected1,int[]str1,int answer,Collection<String> list,int shabi) {
 		this.expected=expected;
 		this.args=str2;
 		this.str=str;
@@ -52,8 +54,9 @@ public class MathExamTest {
 		this.sub=str1;
 		this.answer=answer;
 		this.list=list;
+		this.shabi=shabi;
 	}
-	//
+	
 	@Test
 	public void testInput() {
 		assertEquals(expected,math.input(args,str)[0]);
@@ -64,21 +67,56 @@ public class MathExamTest {
 	}
 //	@Test
 //	public void testAdd() {
-//		assertEquals();
+//		assertEquals(shabi+math.num1,math.answer[math.i]);
+//
+//}
+//	@Test
+//	public void testSub() {
+//		assertEquals(shabi-math.num1,math.answer[math.i]);
+//
+//}
+	@Test
+	public void testMul() {
+		assertEquals(shabi*math.num1,math.answer[math.i]);
+
+}
+//	@Test
+//	public void testDiv() {
+//		assertEquals(math.sub[0]+math.num1,math.answer[math.i]);
 //
 //}
 
-}
-	
-	
+	//MathExam6301 的测试
+	@Test
+	public void testMultiplication() {
+		c=math1.multiplication();
+		assertEquals(math1.a*math1.b,c);
+	}
+
+	@Test
+	public void testDivision() {
+		c=math1.division();
+		assertEquals(math1.a/math1.b,c);
+	}
+
+	@Test
+	public void testAddition() {
+		c=math1.addition();
+		assertEquals(math1.a+math1.b,c);
+		
+	}
+
+	@Test
+	public void testSubtraction() {
+		c=math1.subtraction();
+		assertEquals(math1.a-math1.b,c);
+	}
 
 //	@Test
-//	void testExamine() {
-//		fail("尚未实现");
+//	void testMath() {
+//		
 //	}
-//
-//	@Test
-//	void testMain() {
-//		fail("尚未实现");
-//	}
+
+}
+	
 
