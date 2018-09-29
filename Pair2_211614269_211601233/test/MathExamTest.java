@@ -35,12 +35,17 @@ public class MathExamTest {
 		assertEquals(true, MathExam.checkInput(f));
 	}
 
-	/* @Test
+	 @Test
 	public void testInform() {
-		
+		 String[] a=new String[] {"-n","50","-grade","3"};
+			String[] b=new String[] {"-grade","2","-n","50"};
+			int[] aa=new int[] {3,50};
+			int[] bb=new int[] {2,50};
+			assertArrayEquals(aa,MathExam.inform(a));
+			assertArrayEquals(bb,MathExam.inform(b));
 	}
 
-	@Test
+	/*@Test
 	public void testMathOne() {
 		fail("Not yet implemented");
 	}
