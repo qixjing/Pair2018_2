@@ -13,19 +13,19 @@ import java.util.Scanner;
 public class MathExam6387 {
 
 	public static Scanner in;
-	public static int x,y,z,f,h,g;
+	public static int x,y,z,f,h,g,i;
 	public static String[] str ;
 	public static String rem;
+	public static String [] strArr;
 
 	public static void main(String args[]) throws FileNotFoundException, InterruptedException {
 		// TODO Auto-generated method stub
-		int n ;
-//		in = new Scanner(System.in);
-//		n = in.nextInt();
-//		g = in.nextInt();
+		in = new Scanner(System.in);
+		i = in.nextInt();
+		g = in.nextInt();
 //		命令指令输入 String[] 转化为 int
-		int i =Integer.valueOf(args[0]).intValue();//输入题目
-		int g =Integer.valueOf(args[1]).intValue();//输入年级
+//		i =Integer.valueOf(args[0]).intValue();//输入题目
+//		g =Integer.valueOf(args[1]).intValue();//输入年级
 		//输出保存在文件中
 		File file = new File("out6387.txt");
 		PrintStream ps = new PrintStream(file);
@@ -38,9 +38,7 @@ public class MathExam6387 {
 	public static void GradeOne( int n ) {
 		str = new String[n];
 		for (int i = 0; i < n ; i++) {
-			x = (int)(Math.random()*100);
-			y = (int)(Math.random()*100);
-			f = (int)(Math.random()*2);
+			RandomNumber ();
 			// 判断加法和减法 0为加法
 			if ( f == 0) {
 				System.out.println("(" + (i+1) + ")" +" " + x + "+" + y + " = " );
@@ -70,9 +68,7 @@ public class MathExam6387 {
 	public static void GradeTwo( int n ) {
 		str = new String[n];
 		for (int i = 0; i < n; i++) {
-			x = new Random().nextInt(10) + 1;
-			y = new Random().nextInt(10) + 1;
-			f = (int)(Math.random()*2);
+			RandomNumber ();
 			
 			if ( f == 0 && y!=0 && x!=0) {
 				System.out.println("(" + (i+1) + ")" +" " + x + " × " + y + " = " );
@@ -104,19 +100,14 @@ public class MathExam6387 {
 		str = new String[n];
 		
 		for (int i = 0; i < n; i++) {
-			x = new Random().nextInt(10) + 1;
-			y = new Random().nextInt(10) + 1;
-			z = new Random().nextInt(10) + 1;
-			f = (int)(Math.random()*3);
-			h = (int)(Math.random()*3);
+			RandomNumber();
 			//int 转化为 String
 			String x1 = String.valueOf(x);
 			String y1 = String.valueOf(y);
 			String z1 = String.valueOf(z);
-			
 			String [] strArr = { x1,y1,z1,SymbolicJudgment(h),SymbolicJudgment(f) };
-			System.out.println("(" + (i+1) + ")" +" " + z1 + " " + SymbolicJudgment(h) + " " + y1 + " " + SymbolicJudgment(f) + " " + x1 + " = " );
-			str[i] = "(" + (i+1) + ")" +" " + z1 +" " + SymbolicJudgment(h) +" " + y1 +" " + SymbolicJudgment(f) +" " + x1 + " = "  + ReversePolish(strArr);
+			System.out.println("(" + (i+1) + ") " + z1 + " " + SymbolicJudgment(h) + " " + y1 + " " + SymbolicJudgment(f) + " " + x1 + " = " );
+			str[i] = "(" + (i+1) + ") " + z1 +" " + SymbolicJudgment(h) +" " + y1 +" " + SymbolicJudgment(f) +" " + x1 + " = "  + ReversePolish(strArr);
 		}
 		System.out.println("--------标准答案---------");
 		//输出答案
@@ -125,6 +116,15 @@ public class MathExam6387 {
 		//输出日期和学号姓名
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
 		System.out.println("              211606387 姓名：叶宏奇  " +sdf.format(new Date()));
+	}
+
+	public static void  RandomNumber () {
+		x = new Random().nextInt(30) + 1;
+		y = new Random().nextInt(30) + 1;
+		z = new Random().nextInt(30) + 1;
+		f = (int)(Math.random()*3);
+		h = (int)(Math.random()*3);
+		
 	}
 	//选择年级
 	public static int ChoiceGrade( int n , int g ) {

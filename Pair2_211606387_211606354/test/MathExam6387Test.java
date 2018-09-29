@@ -42,4 +42,17 @@ class MathExam6387Test {
 		MathExam6387.GradeTwo(5);
 		assertEquals(5, MathExam6387.str.length);
 	}
+	
+	@Test
+	public void GradeThree() {
+		MathExam6387.GradeThree(5);
+		assertEquals(5, MathExam6387.str.length);
+	}
+	
+	@Test
+	public void testRandomNumber() {
+		new MathExam6387();
+		String[] strArr = {"1","2","+"};
+		assertEquals("3", MathExam6387.ReversePolish(strArr));
+	}
 }
