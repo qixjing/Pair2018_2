@@ -14,21 +14,6 @@ import java.util.regex.Pattern;
 public class MathExam6360 {
 	static int count ;
 	static int grade ;
-	public static int getCount() {
-		return count;
-	}
-
-	public static int getGrade() {
-		return grade;
-	}
-
-	public static void setCount(int count) {
-		MathExam6360.count = count;
-	}
-
-	public static void setGrade(int grade) {
-		MathExam6360.grade = grade;
-	}
 	static String Date[] = new String[100];
 	static String QT[] = new String[1000];				//定义全局变量，存放问题
 	static String QT_1[] = new String[1000];
@@ -109,7 +94,7 @@ public class MathExam6360 {
 	}
 	
 
-	private static void TxT(int count) {
+	public static void TxT(int count) {
     
 		DateFormat dt = DateFormat.getDateTimeInstance(); 		//获取当前时间
 		Date[0] = dt.format(new Date());
@@ -190,54 +175,57 @@ public class MathExam6360 {
 		}
 	}
 	
-	private static void  calculate_1(int count) {					//一年级计算
-		for(int i=1;i<=count;) {
+	public static int  calculate_1(int count) {	//一年级计算
+		int i=0;
+		for(i=0;i<count;) {
 			int a=(int)(Math.random()*10+1);
 			int b=(int)(Math.random()*10+1);
 			int symbol=(int)(Math.random()*2);
 		
 			if(symbol==0) {
-				QT[i-1]=a + " + " + b;
-				QT_1[i-1]=a + "+" + b;
+				QT[i]=a + " + " + b;
+				QT_1[i]=a + "+" + b;
 			}
 			else if(symbol==1) {
-				QT[i-1]=a + " - " + b;
-				QT_1[i-1]=a + "-" + b;
+				QT[i]=a + " - " + b;
+				QT_1[i]=a + "-" + b;
 			}
-		List<String> ls= toInfixExpression(QT_1[i-1]);
+		List<String> ls= toInfixExpression(QT_1[i]);
   		List<String> rec=parseSuffixExpression(ls);
   		if(reckon(rec).equals("false")) 
   			{continue;}	
-  		AS[i-1]=QT[i-1]+" = "+reckon(rec);
+  		AS[i]=QT[i]+" = "+reckon(rec);
 		i++;
 		}
+		return i;
 	}
 	
-	private static void  calculate_2(int count) {					//二年级计算
-		for(int i=1;i<=count;) {
-			
+	public static int  calculate_2(int count) {					//二年级计算
+		int i=0;
+		for(i=0;i<count;) {
 			int a=(int)(Math.random()*10);
 			int b=(int)(Math.random()*10);
 			int symbol=(int)(Math.random()*2);
 		
 			if(symbol==0) {
-				QT[i-1]=a + " × " + b;
-				QT_1[i-1]=a + "×" + b;
+				QT[i]=a + " × " + b;
+				QT_1[i]=a + "×" + b;
 			}
 			else if(symbol==1) {
-				QT[i-1]=a + " ÷ " + b;
-				QT_1[i-1]=a + "÷" + b;
+				QT[i]=a + " ÷ " + b;
+				QT_1[i]=a + "÷" + b;
 			}
-		List<String> ls= toInfixExpression(QT_1[i-1]);
+		List<String> ls= toInfixExpression(QT_1[i]);
 	  	List<String> rec=parseSuffixExpression(ls);
 	  	if(reckon(rec).equals("false")) 
 	  		{continue;}	
-	  	AS[i-1]=QT[i-1]+" = "+reckon(rec);
+	  	AS[i]=QT[i]+" = "+reckon(rec);
 		i++;
 		}
+		return i;
 	}
 	
-	private static void  calculate_3(int count) {
+	public static int  calculate_3(int count) {
 	     int i=0;
 	    while(i<count){
 	 
@@ -329,6 +317,7 @@ public class MathExam6360 {
 	  			i++;
 	  			 
 	      	}
+	    return i;
 	     
 	    }
 	
