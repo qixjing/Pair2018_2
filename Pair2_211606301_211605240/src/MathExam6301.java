@@ -49,7 +49,7 @@ public class MathExam6301 {
 		  File file = new File(filename+".txt"); 
 		try {
 			out = new FileOutputStream(file);
-			for(;i<n;i++)
+			for(int i=0;i<n;i++)
 		{	
 				int k=(int) (Math.random()*2);
 			if (k==0 && grade==1) {//进行加法计算

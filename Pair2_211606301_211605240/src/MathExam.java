@@ -64,52 +64,52 @@ public class MathExam {
 	
 	
 	//加法
-	private static void add() {
+	static void add(int num) {
 		// TODO 自动生成的方法存根
 			num1 = (int) (Math.random()*99);
 			sub[m]=num1;
-			word.insert(word.length()," + "+num1);
-			answer[i] = answer[i]+num1;
+		
+		answer[i] = num+num1;
 	}
 	//减法
-	private static void sub() {
+	static void sub(int num) {
 		// TODO 自动生成的方法存根
 		num1 = (int) (Math.random()*(answer[i]-1));
 		sub[m]=num1;
-		word.insert(word.length()," - "+num1);
-		answer[i] = answer[i]-num1;
+
+		answer[i] = num-num1;
 	}
 	//乘法
-	private static void mul(){
+	static void mul(int num){
 		// TODO 自动生成的方法存根
 			num1 = (int) (Math.random()*99);
 			sub[m]=num1;
-		word.insert(word.length(), " x "+num1);
-		answer[i]= answer[i]*num1;
+
+		answer[i]= num*num1;
 	}
 	//除法
-	private static void div() {
+	static void div(int num) {
 		// TODO 自动生成的方法存
 		//这里写一个等级比较
 				num1 = 1+(int)(Math.random()*99);
-				rem=answer[i]%num1;	
+				rem=num%num1;	
 				sub[m]=num1;
 				if(rem>0) {
-					if(level<str[g]) {
-					word.insert(word.length(), " - "+rem);
+					if(level<1) {
+					word.insert(word.length()-1, " - "+rem);
 					word.insert(word.length(), " ÷ "+num1);
 					}else {
 						word.insert(0,"( ");
-						word.insert(word.length(), " - "+rem+" ) ÷ "+num1);
+						word.insert(word.length(), " - "+rem+" ) ÷ "+num1+"");
 					}
-					answer[i]=(answer[i]-rem)/num1;
+					answer[i]=(num-rem)/num1;
 					j++;
 				}else {
 					word.insert(word.length()," ÷ "+num1);
-					answer[i]=answer[i]/num1;}
+					answer[i]=num/num1;}
 
 	}
-	private static void operation(int n)  {
+	static void operation(int n)  {
 		// TODO 自动生成的方法存根
 		//str数组储存了运算符的等级和符号；answer数组包含式子答案；word数组储存题目；
 		//f是随机运算符的个数;num是随机的第一个数;g是选择第g个运算符;i是第i道题；j是当前符号数量
@@ -118,11 +118,11 @@ public class MathExam {
 			p = new PrintWriter(new FileOutputStream(file.getAbsolutePath()));
 			out = new FileOutputStream(file);
 			id = new StringBuffer("");
-			level=1;
 			for(int i=0;i<n;i++) {//出n道题目的循环
 				m=1; //存数字个数
+				level=1;
 					f = 2+(int) (Math.random()*2); //f:随机抽取运算符的个数
-					g = (int)(Math.random()*(str.length-1));//第一个运算符
+					g = (int)(Math.random()*(str.length));//第一个运算符
 					answer[i]= (int)(Math.random()*99);
 					sub[0]=answer[i];
 					word= new StringBuffer(answer[i]+"");
@@ -135,18 +135,23 @@ public class MathExam {
 							word.insert(word.length(), " )");
 							j++;
 						}
+						//这个地方的位置还要再讨论一下
 						 //随机选择符号
 						if(g==0) {	
-							add();
+							add(answer[i]);
+							word.insert(word.length()," + "+num1);
 						}
-						else if(g==1) {
-							sub();
+						else if(g==3) {
+							mul(answer[i]);
+							word.insert(word.length(), " x "+num1);
+							
 							}
 						else if(g==2) {
-							div();
+							div(answer[i]);
 						}
 						else {
-							mul();
+							sub(answer[i]);
+							word.insert(word.length()," - "+num1);
 						}
 						m++;
 						level=str[g];
@@ -159,7 +164,10 @@ public class MathExam {
 						
 						}while(g==g1);
 						g1=5;
-					}		
+						
+						
+						
+					}	
 				//查重
 				if(examine(sub,answer[i],list)) {
 				word.insert(0, "("+(i+1)+")");
@@ -203,14 +211,14 @@ public class MathExam {
 	}
 	public static void main(String[] args){
 		// TODO 自动生成的方法存根
-		int[] str1= new int[3];
-		input(args,str1);
-		if(str1[0]==0){
-			return ;
-		}
-		n=str1[1];
-		grade=str1[2];
-		grade(20,3);
+//		int[] str1= new int[3];
+//		input(args,str1);
+//		if(str1[0]==0){
+//			return ;
+//		}
+//		n=str1[1];
+//		grade=str1[2];
+		grade(20,2);
 	}
 
 }
