@@ -10,16 +10,16 @@ public class ShuntingYard {
          // 符号(运算符)栈
          Stack<Character> Operators = new Stack<Character>();
          // 去除表达式中空格
-         String TempExpression = Expression.replace(" ", "");
+         // Expression = Expression.replace(" ", "");
          // 保存高位数字(有问题,不能出现0)
          int HighNumber = 0;
          // 字符串表达式转化为字符数组
-         char[] CharArray = TempExpression.toCharArray();
+         // char[] CharArray = TempExpression.toCharArray();
          // 遍历字符数组
-         for (int i = 0; i < CharArray.length; i++) {
+         for (int i = 0; i < Expression.length(); i++) {
         	// 判断当前char是否为数字
-            if (Character.isDigit(CharArray[i])) {
-            	HighNumber = 10 * HighNumber + Integer.parseInt(String.valueOf(CharArray[i])); //临时保存大于10的数字
+            if (Character.isDigit(Expression.charAt(i))) {
+            	HighNumber = 10 * HighNumber + Integer.parseInt(String.valueOf(Expression.charAt(i))); //临时保存大于10的数字
             } else {
                 if (HighNumber != 0) {
                 	// 数字入栈
@@ -28,10 +28,10 @@ public class ShuntingYard {
                 	HighNumber = 0;
                  }
                 // 括号处理
-                if (CharArray[i] == '(') {
+                if (Expression.charAt(i) == '(') {
                 	// 左括号入栈
-                	Operators.push(CharArray[i]);
-                } else if (CharArray[i] == ')') {
+                	Operators.push(Expression.charAt(i));
+                } else if (Expression.charAt(i) == ')') {
                 	// 括号里面运算完(查看堆栈顶部的对象，但不从堆栈中移除)
                     while (Operators.peek() != '(') { 
                     	// 数字出栈，数字出栈，符号出栈，计算
@@ -41,14 +41,14 @@ public class ShuntingYard {
                     }
                     // 左括号出栈
                     Operators.pop();
-                } else if (GetPriority(CharArray[i]) > 0) {
+                } else if (GetPriority(Expression.charAt(i)) > 0) {
                 	// 栈是否为空
                     if (Operators.isEmpty()) {
                     	// 符号入栈
-                    	Operators.push(CharArray[i]);
+                    	Operators.push(Expression.charAt(i));
                     } else {
                         // 若栈顶元素优先级大于或等于要入栈的元素,将栈顶元素弹出并计算,然后入栈
-                        if (GetPriority(Operators.peek()) >= GetPriority(CharArray[i])) {
+                        if (GetPriority(Operators.peek()) >= GetPriority(Expression.charAt(i))) {
                         	// 数字出栈，数字出栈，符号出栈，计算
                             int TempResult = TempCalc(Numbers.pop(), Numbers.pop(),Operators.pop());
                             if(TempResult < 0) {
@@ -58,7 +58,7 @@ public class ShuntingYard {
                             Numbers.push(TempResult);
                         }
                         // 符号入栈
-                        Operators.push(CharArray[i]);
+                        Operators.push(Expression.charAt(i));
                     }
                 }
             }
