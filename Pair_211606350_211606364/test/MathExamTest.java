@@ -6,10 +6,11 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 public class MathExamTest {
 
-@Test
+
 public void testMathExamOne() throws Exception  {
 	String[] input = new String[] {"-n", "10", "-grade", "1"};
 	MathExam.main(input);

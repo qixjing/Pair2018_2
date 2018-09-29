@@ -1,7 +1,6 @@
 
 
 
-
 import java.util.List;
 import java.util.Random;
 import java.util.Date;
@@ -25,6 +24,7 @@ public class MathExam {
 
 
 public static void main(String[] args1) throws IOException {
+	//String args1[] = {"-n","50","-grade","3"};
 	 int n = 0;
 	 int grade = 0;
 	if (args1[0].equals("-n")) {
@@ -53,8 +53,7 @@ public static void main(String[] args1) throws IOException {
   }
  
   if(e==3) {
-	  	grade3(a);
-		
+	  	grade3(a);	
 		}
    System.setOut(ps);
    File file = new File("e:/out.txt");
@@ -77,6 +76,8 @@ public static void main(String[] args1) throws IOException {
 			 list.add(StringTokenizer.nextToken());
 			 }
 		 }
+	
+	
 public static boolean out_boolean() {
 	return true;
 }
@@ -115,17 +116,6 @@ private static int ys(int x,int y){
 		 if (stack1.isEmpty()) { // 若为空栈，将字符存入栈中
 			 stack1.push(zf);
 			 return ;
-		 }if ("(".equals(zf)){ // 判断字符是否为为“(”
-			 stack1.push(zf);
-			 return ;
-		 }if (")".equals(zf)) { // 判断字符是否为为“)”
-			 String string = "";
-			 while(!"(".equals(string = stack1.pop())) {
-				 RPOlist.add(string);
-			 }return ;
-		 }if ("(".equals(stack1.peek())) { // 若当前栈顶的元素为“(”,则直接入栈
-			 stack1.push(zf);
-			 return ;
 		 }if (judge(zf,stack1.peek())) {// 判断优先级,若预存的字符优先级大于栈顶元素，将此字符存入栈中
 			 stack1.push(zf);
 			 return ;
@@ -141,16 +131,12 @@ private static int ys(int x,int y){
 		
 		private int Judge(String str) {
 			switch(str) {
-			 case "(" :
-				 return 3; 
 			 case "×" :
 			 case "÷" :
 				 return 2;
 			 case "+" :
 			 case "-" :
 				 return 1;
-			 case ")" :
-				 return 0;
 			 default:
 				 return -1;
 			 }
@@ -246,6 +232,7 @@ private static int ys(int x,int y){
 				int n=random.nextInt(2)+2; //2-4个运算符
 				int[] number=new int[n+1]; 
 				String bds=new String();
+				int rd = (int)Math.random()*100;
 				for(int j=0;j<=n;j++){
 					number[j]=random.nextInt(100)+1; //4-5个数字
 				}
@@ -269,6 +256,8 @@ private static int ys(int x,int y){
 			System.out.println("("+(i+1)+")"+" "+list1.get(i)+"="+me.count());
 	 }
 	 }
+	 
+	
 	 
  }
 
