@@ -12,10 +12,10 @@ import java.util.Scanner;
 
 public class MathExam6387 {
 
-	private static Scanner in;
-	private static int x,y,z,f,h,g;
-	private static String[] str ;
-	private static String rem;
+	public static Scanner in;
+	public static int x,y,z,f,h,g;
+	public static String[] str ;
+	public static String rem;
 
 	public static void main(String args[]) throws FileNotFoundException, InterruptedException {
 		// TODO Auto-generated method stub
@@ -99,7 +99,7 @@ public class MathExam6387 {
 	}
 	
 	//三年级混合运算
-	private static  void GradeThree( int n ) {
+	public static  void GradeThree( int n ) {
 		// TODO 自动生成的方法存根
 		str = new String[n];
 		
@@ -161,7 +161,7 @@ public class MathExam6387 {
 	}
 	
 	//判断符号
-	 private static String SymbolicJudgment(int f) {
+	public static String SymbolicJudgment(int f) {
 		// TODO 自动生成的方法存根
 		 if (f == 0) {
 			rem = "+";
@@ -176,7 +176,7 @@ public class MathExam6387 {
 	}
 	
 	//逆波兰表达式 后缀运算 用于混合运算
-    private static String ReversePolish (String[] strArr){
+	public static String ReversePolish (String[] strArr){
         String str = "+-*/";
         Stack<String> stack = new Stack<String>();
         //遍历数组中的每一个元素
