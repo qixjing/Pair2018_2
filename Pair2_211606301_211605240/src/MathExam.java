@@ -211,14 +211,13 @@ public class MathExam {
 	}
 	public static void main(String[] args){
 		// TODO 自动生成的方法存根
-//		int[] str1= new int[3];
-//		input(args,str1);
-//		if(str1[0]==0){
-//			return ;
-//		}
-//		n=str1[1];
-//		grade=str1[2];
-		grade(20,2);
+		int[] str1= new int[3];
+		input(args,str1);
+		if(str1[0]==0){
+			return ;
+		}
+		n=str1[1];
+		grade=str1[2];
 	}
 
 }

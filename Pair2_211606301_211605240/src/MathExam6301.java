@@ -89,7 +89,4 @@ public class MathExam6301 {
 		}
 
 	}
-//	public static void main(String[] args){
-//		math(10,2);
-//	}
 	}
