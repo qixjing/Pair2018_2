@@ -11,7 +11,7 @@ public class ShuntingYardTest {
 	public void Calc() {
 		int Result;
 		try {
-			Result = Integer.valueOf(new ShuntingYard().Calc("(1 +2) ¡Á3¡Á(1 +2)"));
+			Result = Integer.valueOf(new ShuntingYard().Calc("(1 +2) ¡Á3¡Á(1 +2)", 3));
     	}
     	catch(EmptyStackException e){
     		Result = -1;

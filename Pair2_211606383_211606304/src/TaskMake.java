@@ -19,13 +19,13 @@ public class TaskMake {
 				// 题目
 				Question = Question + GetNumber(i) + Expression + "\r\n";
 				// 题目和答案
-				Answer = Answer + GetNumber(i) + Expression + " = " + calc.Calc(Expression) + "\r\n";
+				Answer = Answer + GetNumber(i) + Expression + " = " + calc.Calc(Expression, 1) + "\r\n";
 				
 			} else {
 				Expression = GetExpression(Temp, Random(1, Temp), "-");
 				// System.out.println(Expression);
 				Question = Question + GetNumber(i) + Expression + "\r\n";
-				Answer = Answer + GetNumber(i) + Expression + " = " + calc.Calc(Expression) + "\r\n";
+				Answer = Answer + GetNumber(i) + Expression + " = " + calc.Calc(Expression, 1) + "\r\n";
 			}
 		}
 		System.out.println(Question + "\r\n" + Answer);
@@ -45,7 +45,7 @@ public class TaskMake {
 			if (Random()) {
 				Expression = GetExpression(mul1, Random(1, 10), "×");
 				Question = Question + GetNumber(i) + Expression + "\r\n";
-				Answer = Answer + GetNumber(i) + Expression + " = " + calc.Calc(Expression) + "\r\n";
+				Answer = Answer + GetNumber(i) + Expression + " = " + calc.Calc(Expression, 2) + "\r\n";
 			} else {
 				int roo;
 				// 数据范围需要注意
@@ -54,11 +54,11 @@ public class TaskMake {
 				if (roo == 0) {
 					Expression = GetExpression(mul1, mul2, "÷");
 					Question = Question + GetNumber(i) + Expression + "\r\n";
-					Answer = Answer + GetNumber(i) + Expression + " = " + calc.Calc(Expression) + "\r\n";
+					Answer = Answer + GetNumber(i) + Expression + " = " + calc.Calc(Expression, 2) + "\r\n";
 				} else {
 					Expression = GetExpression(mul1, mul2, "÷");
 					Question = Question + GetNumber(i) + Expression + "\r\n";
-					Answer = Answer + GetNumber(i) + Expression + " = " + calc.Calc(Expression) + "..." + String.valueOf(roo) + "\r\n";
+					Answer = Answer + GetNumber(i) + Expression + " = " + calc.Calc(Expression, 2) + "..." + String.valueOf(roo) + "\r\n";
 				}
 			}
 		}
@@ -89,7 +89,7 @@ public class TaskMake {
 					int TempRandom = Random(1, 100);
 					
 					//减法不能出现负数 除法不能有余数
-					if(Integer.valueOf(calc.Calc(Expression)) < 0) {
+					if(Integer.valueOf(calc.Calc(Expression, 3)) < 0) {
 						ReMake=true;
 						break;
 					}
@@ -100,7 +100,7 @@ public class TaskMake {
 						Expression = Expression + " " + TempOperator + " " + String.valueOf(TempRandom);
 					}
 					//减法不能出现负数 除法不能有余数
-					if(Integer.valueOf(calc.Calc(Expression)) < 0) {
+					if(Integer.valueOf(calc.Calc(Expression, 3)) < 0) {
 						ReMake=true;
 						break;
 					}
@@ -110,7 +110,7 @@ public class TaskMake {
 			}
 
 			Question = Question + GetNumber(i) + Expression + "\r\n";
-			Answer = Answer + GetNumber(i) + Expression + " = " + calc.Calc(Expression) + "\r\n";
+			Answer = Answer + GetNumber(i) + Expression + " = " + calc.Calc(Expression, 3) + "\r\n";
 		}
 		System.out.println(Question + "\r\n" + Answer);
 		file.Write("out.txt", Question + "\r\n" + Answer);

@@ -4,7 +4,7 @@ import java.util.Stack;
 public class ShuntingYard {
 	
 	 // 计算(中缀)表达式
-	 public String Calc(String Expression) {
+	 public String Calc(String Expression, int Grade) {
 		 // 数字栈
          Stack<Integer> Numbers = new Stack<Integer>();
          // 符号(运算符)栈
@@ -35,7 +35,7 @@ public class ShuntingYard {
                 	// 括号里面运算完(查看堆栈顶部的对象，但不从堆栈中移除)
                     while (Operators.peek() != '(') { 
                     	// 数字出栈，数字出栈，符号出栈，计算
-                        int TempResult = TempCalc(Numbers.pop(), Numbers.pop(),Operators.pop());
+                        int TempResult = TempCalc(Numbers.pop(), Numbers.pop(), Operators.pop(), Grade);
                         // 计算结果入栈
                         Numbers.push(TempResult);
                     }
@@ -50,7 +50,7 @@ public class ShuntingYard {
                         // 若栈顶元素优先级大于或等于要入栈的元素,将栈顶元素弹出并计算,然后入栈
                         if (GetPriority(Operators.peek()) >= GetPriority(Expression.charAt(i))) {
                         	// 数字出栈，数字出栈，符号出栈，计算
-                            int TempResult = TempCalc(Numbers.pop(), Numbers.pop(),Operators.pop());
+                            int TempResult = TempCalc(Numbers.pop(), Numbers.pop(), Operators.pop(), Grade);
                             if(TempResult < 0) {
                             	return "-1";
                             }
@@ -101,7 +101,7 @@ public class ShuntingYard {
         	int TempResult = TempCalc(TempOne, TempTwo,TempOp);
         	Numbers.push(TempResult);
         	*/
-        	int TempResult = TempCalc(Numbers.pop(), Numbers.pop(),Operators.pop());//计算两个数据
+        	int TempResult = TempCalc(Numbers.pop(), Numbers.pop(), Operators.pop(), Grade);//计算两个数据
             if(TempResult < 0) {
             	return "-1";
             }
@@ -125,7 +125,7 @@ public class ShuntingYard {
     }
 
     // 运算次序是反的,跟入栈出栈次序有关
-    private static int TempCalc(int two, int one, char Operator) {
+    private static int TempCalc(int two, int one, char Operator, int Grade) {
         int Result = -1;
         if (Operator == '+') {
         	Result = one + two;
@@ -134,7 +134,8 @@ public class ShuntingYard {
         } else if (Operator == '×') {
         	Result = one * two;
         } else if (Operator == '÷') {
-      	  if(one % two != 0) {
+        	// 三年级的判断
+      	  if(one % two != 0 && Grade == 3) {
       		  return -1;
       	  }
       	Result = one / two;

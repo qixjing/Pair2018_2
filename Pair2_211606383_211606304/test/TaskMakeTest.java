@@ -11,12 +11,12 @@ public class TaskMakeTest {
 		ShuntingYard Calc = new ShuntingYard();
 		int Result;
 		try {
-			Result = Integer.valueOf(Calc.Calc(Questions));
+			Result = Integer.valueOf(Calc.Calc(Questions, 1));
     	}
     	catch(EmptyStackException e){
     		Result = -1;
     	}
-		assertTrue(Result > 0);
+		assertTrue(Result >= 0);
 	}
 	@Test
 	public void MakeGradeTwo() {
@@ -24,7 +24,7 @@ public class TaskMakeTest {
 		ShuntingYard Calc = new ShuntingYard();
 		int Result;
 		try {
-			Result = Integer.valueOf(Calc.Calc(Questions));
+			Result = Integer.valueOf(Calc.Calc("8 ¡Â 7", 1));
     	}
     	catch(EmptyStackException e){
     		Result = -1;
@@ -37,7 +37,7 @@ public class TaskMakeTest {
 		ShuntingYard Calc = new ShuntingYard();
 		int Result;
 		try {
-			Result = Integer.valueOf(Calc.Calc(Questions));
+			Result = Integer.valueOf(Calc.Calc(Questions, 1));
     	}
     	catch(EmptyStackException e){
     		Result = -1;
