@@ -1,6 +1,7 @@
-package test;
+﻿package test;
 
 import static org.junit.Assert.assertNotNull;
+
 import static org.junit.Assert.assertTrue;
 
 import org.junit.BeforeClass;

@@ -1,6 +1,7 @@
-package test;
+﻿package test;
 
 import java.io.File;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -15,6 +16,7 @@ public class MathExam211506368 {
 
 	//扫描器，用于扫描键盘输入
 	private static Scanner s = new Scanner(System.in);
+	
 	private static int firstNum_index = 0;		
 	private static int secondNum_index = 2;	
 	private static int  thirdNum_index = 4;
@@ -61,7 +63,7 @@ public class MathExam211506368 {
 		}
 	}
 
-	/**
+	/*
 	 * 生成题目，默认为2年级
 	 * @param count
 	 * @return
