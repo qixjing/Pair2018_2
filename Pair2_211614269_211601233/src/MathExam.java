@@ -132,60 +132,7 @@ public class MathExam {
 
 		}
 
-		File file = new File("out.txt");
-		if (!file.exists()) {
-			File parent = file.getParentFile();
-			if (parent != null && !parent.exists()) {
-				parent.mkdirs();
-			}
-			try {
-				file.createNewFile();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				System.out.println("文件创建失败,请重试");
-			}
-		}
-		try {
-			OutputStream out = new FileOutputStream(file);
-			byte[] data;
-			for (String str : probs) {
-				str += "\r\n";
-				data = str.getBytes();
-				try {
-					out.write(data);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					System.out.println("写入错误!");
-				}
-			}
-			String fg = " " + "\r\n";
-			data = fg.getBytes();
-			try {
-				out.write(data);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				System.out.println("写入错误!");
-			}
-			for (String str : anss) {
-				str += "\r\n";
-				data = str.getBytes();
-				try {
-					out.write(data);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					System.out.println("写入错误!");
-				}
-			}
-			try {
-				out.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				System.out.println("io错误");
-			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			System.out.println("找不到文件,请重试");
-		}
+		write(probs, anss);
 	}
 
 	public static void mathTwo(int n) {
@@ -218,61 +165,7 @@ public class MathExam {
 			probs.add(prob);
 			anss.add(ans);
 		}
-
-		File file = new File("out.txt");
-		if (!file.exists()) {
-			File parent = file.getParentFile();
-			if (parent != null && !parent.exists()) {
-				parent.mkdirs();
-			}
-			try {
-				file.createNewFile();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				System.out.println("文件创建失败,请重试");
-			}
-		}
-		try {
-			OutputStream out = new FileOutputStream(file);
-			byte[] data;
-			for (String str : probs) {
-				str += "\r\n";
-				data = str.getBytes();
-				try {
-					out.write(data);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					System.out.println("写入错误!");
-				}
-			}
-			String fg = " " + "\r\n";
-			data = fg.getBytes();
-			try {
-				out.write(data);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				System.out.println("写入错误!");
-			}
-			for (String str : anss) {
-				str += "\r\n";
-				data = str.getBytes();
-				try {
-					out.write(data);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					System.out.println("写入错误!");
-				}
-			}
-			try {
-				out.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				System.out.println("io错误");
-			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			System.out.println("找不到文件,请重试");
-		}
+		write(probs, anss);
 	}
 
 	public static void mathThr(int n) {
@@ -364,6 +257,7 @@ public class MathExam {
 
 					}
 				}
+
 			}
 
 			// 将被拆分的题目转成不带题号的字符串
@@ -387,6 +281,10 @@ public class MathExam {
 
 		}
 
+		write(probs, anss);
+	}
+
+	public static void write(ArrayList<String> probs, ArrayList<String> anss) {
 		File file = new File("out.txt");
 		if (!file.exists()) {
 			File parent = file.getParentFile();
