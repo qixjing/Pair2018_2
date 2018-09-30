@@ -42,18 +42,18 @@ public class MathExam {
 				try {
 		        	topic[i].append("(" + (i+1) + ")");
 		        	standAnswer[i].append("(" + (i+1) + ")");
-		        	int res = calPoland(infixExpression,i);
+		        	calPoland(infixExpression,i,grade);
 		        	topic[i].append(System.lineSeparator());
-		        	standAnswer[i].append(" = " + res);
 		        	if(i != len - 1){
 		        		standAnswer[i].append(System.lineSeparator());
 		        	}
-				} catch (Exception e) {
+				}catch (ArithmeticException e) {
 					// 生成的题目不合法，清空StringBuffer
 					topic[i].setLength(0);
 					standAnswer[i].setLength(0);
 					i--;
 				}
+
 			}
 			// 输出到文件
 			try {
@@ -110,88 +110,7 @@ public class MathExam {
 	}
 	
 	/**
-	 * 作用：生成一二年级题目
-	 * @param len 用户要求生成的题目数量
-	 * @param grade 年级
-	 */
-
-	static void generatingTopicTwo(int len,int grade) {
-		for (int i = 0; i < len; i++) {
-			// 获取两个随机数，num1,num2表示参与计算的两个数字;
-			int num1 = (int) (Math.random() * 100);
-			int num2 = (int) (Math.random() * 100);
-			
-			// symbol代表运算符号;
-			int index = (1 == grade) ? ((int) (Math.random() * 10)) % 2 : 2 + ((int) (Math.random() * 2));
-			char symbol = Operator[index];
-			
-			//确保和不超过100
-			while(0 == index && num1 + num2 >= 100) {
-				num1 = (int) (Math.random() * 100);
-				num2 = (int) (Math.random() * 100);
-			}
-			
-			// 计算结果
-			int res = 0;
-			int remainder = 0; // 余数
-			switch (symbol) {
-			case '+':
-				//确保小学1年级题目为两位数加减整十数和两位数加减一位数
-				if(1 == grade && num1>10 && num2 >10 && num1%10 != 0 && num2%10 !=0) {
-					num2 = num2/10*10;
-				}
-				res = num1 + num2;
-				break;
-			case '-':		
-				// 确保第一个数比第二个数大，避免相减出现负数，小学加减无负数
-				if (num1 < num2) {
-					int temp = num1;
-					num1 = num2;
-					num2 = temp;
-				}
-				//确保小学1年级题目为两位数加减整十数和两位数加减一位数
-				if(1 == grade && num1>10 && num2 >10 && num2%10 !=0) {
-					num2 = num2/10*10;
-				}	
-				res = num1 - num2;
-				break;
-			case '×':
-				//确保为表内乘法
-				num1 %= 10;
-				num2 %= 10;
-				res = num1 * num2;
-				break;
-			case '÷':
-				//防止除数为0
-				while(0 == num2) {
-					num2 = (int) (Math.random() * 100);
-				}
-				
-				//确保为表内除法
-				if(num2>10) {
-					num2 /=10 ;
-				}
-				
-				res = num1 / num2;
-				remainder = num1 % num2;
-				break;
-			}
-			// 将题目和答案记录
-			topic[i].append("(" + (i+1) + ") " + num1 + " " + symbol + " " + num2 + System.lineSeparator());
-			if (symbol == '/') {
-				standAnswer[i].append("(" + (i+1) + ") " + num1 + " " + symbol + " " + num2 + " = " + res
-						+ (remainder != 0 ? ("..." + remainder) : ""));
-			} else {
-				standAnswer[i].append("(" + (i+1) + ") " + num1 + " " + symbol + " " + num2 + " = " + res);
-			}
-			if(i != len - 1){
-        		standAnswer[i].append(System.lineSeparator());
-        	}
-		}
-	}
-	
-	/**
-	 * 作用：生成三年级题目操作符
+	 * 作用：生成题目操作符
 	 * @param len
 	 * @param grade
 	 * @return 
@@ -201,12 +120,12 @@ public class MathExam {
 
 		IDemand demand = null;
 		//生成操作数
-		if(grade == 3) {
-			demand = new Demand3();
-		}else if (grade == 2) {
-			demand = new Demand2();
-		}else if (grade == 1) {
-			demand = new Demand1();
+		try {
+			Class<?> cls = Class.forName("Demand" + grade);
+			demand = (IDemand) cls.newInstance();
+		} catch (Exception e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
 		}
 		Character[] infixExpression = demand.operatorGeneration();
 		// 将生成的操作符在数组[2,n-2]范围内随机排序
@@ -265,13 +184,31 @@ public class MathExam {
 	 * @return 返回计算结果
 	 * @throws Exception 当表达式计算过程中出错时抛出异常
 	 */
-	static int calPoland(Character infix[],int n) throws ArithmeticException{
+	static int calPoland(Character infix[],int n,int grade) throws ArithmeticException{
 		ArrayList<Character> chlist = new ArrayList<Character>();
 		for (Character ch : infix) {
 			if(ch != null) {
 				chlist.add(ch);
 			}
 		}
+		
+		IDemand demand = null;
+		int remainder = 0; // 余数
+
+		try {
+			Class<?> cls = Class.forName("Demand" + grade);
+			demand = (IDemand) cls.newInstance();
+		} catch (Exception e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+//		if(grade == 3) {
+//			demand = new Demand3();
+//		}else if (grade == 2) {
+//			demand = new Demand2();
+//		}else if (grade == 1) {
+//			demand = new Demand1();
+//		}
 		
 		Stack<Object> s = new Stack<Object>();
 		Stack<String> tops = new Stack<String>();
@@ -281,55 +218,61 @@ public class MathExam {
 			if(infix[i] == null) {
 				s.push(' ');
 			}else{				
-				int a,b;
+				int[] num = new int[2];
 				String str1,str2;
-				if(s.peek() instanceof Character) {
-					a = 1 + (int) (Math.random() * 100);
-					str1 = " " + a;
+				Object a = s.pop();
+				Object b = s.pop();
+				
+				boolean falg = demand.operandGeneration(a, b, infix[i],num);
+
+				
+				if(falg) {
+					if(a instanceof Character) {
+						str1 = tops.peek();
+						tops.pop();
+					}else {
+						str1 = " " + num[0];
+					}
+					if(b instanceof Character) {
+						str2 = tops.peek();
+						tops.pop();
+					}else {
+						str2 = " " + num[1];
+					}
 				}else {
-					a = (int) s.peek();
-					str1 = tops.peek();
-					tops.pop();
+					if(a instanceof Character) {
+						str1 = " " + num[0];
+					}else {
+						str1 = tops.peek();
+						tops.pop();
+					}
+					if(b instanceof Character) {
+						str2 = " " + num[1];
+					}else {
+						str2 = tops.peek();
+						tops.pop();
+					}
 				}
-				s.pop();
-				if(s.peek() instanceof Character) {
-					b = 1 + (int) (Math.random() * 100);
-					str2 = " " + b;
-				}else {
-					b = (int) s.peek();
-					str2 = tops.peek();
-					tops.pop();
-				}
-				s.pop();
-				 
+				
+				
 				switch(infix[i])
 				{
 					case '+':
-						s.push(b + a);
+						s.push(num[1] + num[0]);
 						break;
 					case '-':
-						if(b < a ) {
-							int temp = b;
-							b = a;
-							a = temp;
-							
-							String st = str1;
-							str1 = str2;
-							str2 = st;
-						}
-						s.push(b - a);
+						s.push(num[1] - num[0]);
 						break;
 					case '×':
-						s.push(b * a);
+						s.push(num[1] * num[0]);
 						break;
 					case '÷':
-						if(b % a != 0 || a == 0) {
-							throw new ArithmeticException();
+						s.push(num[1] / num[0]);
+						if(demand.isRemainder()) {
+							remainder = num[1] % num[0]; // 余数
 						}
-						s.push(b / a);
 						break;
 				}
-//				System.out.println(s.peek());
 				tops.push(str2 + " " + infix[i] + str1);
 				int j;
 				for(j = k;j<chlist.size();j++) {
@@ -346,7 +289,11 @@ public class MathExam {
 		}
 		topic[n].append(tops.peek());
 		standAnswer[n].append(tops.pop());
-//		System.out.println(s.peek());
+		standAnswer[n].append(" = " + s.peek());
+		if(demand.isRemainder()) {
+			standAnswer[n].append("" + (remainder != 0 ? ("..." + remainder) : ""));
+		}
+
 		return ((Integer) s.pop()).intValue();
 	}
 	

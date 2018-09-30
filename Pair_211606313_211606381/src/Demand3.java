@@ -25,9 +25,42 @@ public class Demand3 implements IDemand {
 	}
 
 	@Override
-	public void operandGeneration() {
+	public boolean operandGeneration(Object num1,Object num2,char symbol,int[] num)throws ArithmeticException {
 		
+		if(num1 instanceof Character) {
+			num[0] = 1 + (int) (Math.random() * 100);
+		}else {
+			num[0] = (int)num1;
+		}
+		if(num2 instanceof Character) {
+			num[1] = 1 + (int) (Math.random() * 100);
+		}else {
+			num[1] = (int)num2;
+		}
+		 
+		switch(symbol)
+		{
+			case '-':
+				if(num[1] < num[0] ) {
+					int temp = num[1];
+					num[1] = num[0];
+					num[0] = temp;
+					if(!(num2 instanceof Character && num1 instanceof Character))
+						return true;
+				}
+				break;
+			case '¡Â':
+				if(num[1] % num[0] != 0 || num[0] == 0) {
+					throw new ArithmeticException();
+				}
+				break;
+		}
+		return false;
+	}
 
+	@Override
+	public boolean isRemainder() {
+		return false;
 	}
 
 }
