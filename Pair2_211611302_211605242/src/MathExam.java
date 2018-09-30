@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 public class MathExam{
 	private static int grade = 0; //年级
 	private static int topicCount = 0; // 出题数
-	private static boolean flag = true;
+	static boolean flag = true;  //为测试方便，不设置成private
 
 	public static void main(String[] args) {
 //		long timeStart = System.currentTimeMillis();  //测试时间
@@ -103,7 +103,7 @@ public class MathExam{
 	private static void exception() {
 		System.out.println("输入有误,程序结束。");
 		flag=false;
-		System.exit(0);
+//		System.exit(0);
 	}
 
 	// 产生txt文本
