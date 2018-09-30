@@ -37,28 +37,25 @@ public class MathExam {
 				topic[i] = new StringBuffer();
 				standAnswer[i] = new StringBuffer();
 			}
-			if(grade == 3) {
-				for(int i = 0;i < len;i++) {
-					Character[] infixExpression = generatingTopic(grade);
-					try {
-			        	topic[i].append("(" + (i+1) + ")");
-			        	standAnswer[i].append("(" + (i+1) + ")");
-			        	int res = calPoland(infixExpression,i);
-			        	topic[i].append(System.lineSeparator());
-			        	standAnswer[i].append(" = " + res);
-			        	if(i != len - 1){
-			        		standAnswer[i].append(System.lineSeparator());
-			        	}
-					} catch (Exception e) {
-						// 生成的题目不合法，清空StringBuffer
-						topic[i].setLength(0);
-						standAnswer[i].setLength(0);
-						i--;
-					}
+			for(int i = 0;i < len;i++) {
+				Character[] infixExpression = generatingTopic(grade);
+				try {
+		        	topic[i].append("(" + (i+1) + ")");
+		        	standAnswer[i].append("(" + (i+1) + ")");
+		        	int res = calPoland(infixExpression,i);
+		        	topic[i].append(System.lineSeparator());
+		        	standAnswer[i].append(" = " + res);
+		        	if(i != len - 1){
+		        		standAnswer[i].append(System.lineSeparator());
+		        	}
+				} catch (Exception e) {
+					// 生成的题目不合法，清空StringBuffer
+					topic[i].setLength(0);
+					standAnswer[i].setLength(0);
+					i--;
 				}
-			}else {
-				generatingTopicTwo(len,grade);
 			}
+			// 输出到文件
 			try {
 				write("out.txt");
 			} catch (IOException e) {
@@ -202,25 +199,16 @@ public class MathExam {
 	 */
 	static Character[] generatingTopic(int grade){
 
-		// 确定操作数和操作符的总个数
-		int n=5+(int)(Math.random()*3);
-		if(n%2 == 0) n++;
-		
-		Character[] infixExpression = new Character[n];
-		
-		// 生成(n-1)/2个操作符，保证至少有两个不同的操作符
-		char c ;
-		infixExpression[n-1] = c = Operator[(int)(Math.random()*4)];
-		for(int j = 1,k = n-2;j < (n-1)/2;j++,k--) {
-			infixExpression[k] = Operator[(int)(Math.random()*4)];
-			c ^= infixExpression[k].charValue();
+		IDemand demand = null;
+		//生成操作数
+		if(grade == 3) {
+			demand = new Demand3();
+		}else if (grade == 2) {
+			demand = new Demand2();
+		}else if (grade == 1) {
+			demand = new Demand1();
 		}
-		
-		if(c == 0) {
-			int q = (int)(Math.random()*4);
-			infixExpression[n-1] = Operator[q] != infixExpression[n-1].charValue() ? Operator[q] : Operator[(q+1)%4];
-		}
-		
+		Character[] infixExpression = demand.operatorGeneration();
 		// 将生成的操作符在数组[2,n-2]范围内随机排序
 		do {
 			List<Character> list = new ArrayList<Character>();  
