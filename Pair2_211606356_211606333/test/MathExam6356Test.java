@@ -1,3 +1,4 @@
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.FileNotFoundException;
@@ -5,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+
 
 class MathExam6356Test {
 
@@ -77,7 +79,7 @@ class MathExam6356Test {
 	}
 
 	@Test
-	void testOutPut() {
+	void testOutPut() throws FileNotFoundException {
 		// 测试输出能否运行
 		assertEquals(true, MathExam6356.outPut());
 	}

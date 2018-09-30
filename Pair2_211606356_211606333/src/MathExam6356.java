@@ -39,8 +39,14 @@ public class MathExam6356 {
 		if (!message.equals("正常运行")) {
 			System.out.println(message);
 			System.exit(0);
-		}
-		
+		}else if (grade == 1) {
+			gradeOne();
+		} else if (grade == 2) {
+			gradeTwo();
+		} else if (grade == 3) {
+			gradeThree();
+		} 
+		outPut();
 
 	}
 
@@ -53,8 +59,8 @@ public class MathExam6356 {
 		else if (input.length == 4) {
 			if (input[0].equals("-n") && input[2].equals("-grade")) {
 				try {
-					n = Integer.parseInt(input[1]);
-					grade = Integer.parseInt(input[3]);
+					setN(Integer.parseInt(input[1]));
+					setGrade(Integer.parseInt(input[3]));
 				} catch (NumberFormatException e) {
 					errorMes="请输入正整数！";
 					return errorMes;
@@ -62,8 +68,8 @@ public class MathExam6356 {
 
 			} else if (input[2].equals("-n") && input[0].equals("-grade")) {
 				try {
-					n = Integer.parseInt(input[3]);
-					grade = Integer.parseInt(input[1]);
+					setN(Integer.parseInt(input[3]));
+					setGrade(Integer.parseInt(input[1]));
 				} catch (NumberFormatException e) {
 					errorMes="请输入正整数！";
 					return errorMes;
@@ -72,23 +78,10 @@ public class MathExam6356 {
 		}if (n<=0||grade<=0) {
 			errorMes="您输入了小于等于0的数，请输入正整数！";
 			return errorMes;
+		}if (grade>3) {
+			errorMes="目前只支持1-3年级，请重新输入";
 		}
-				if (grade == 1) {
-				gradeOne();
-			} else if (grade == 2) {
-				gradeTwo();
-			} else if (grade == 3) {
-				gradeThree();
-			} else {
-				errorMes="目前只支持1-3年级，请重新输入";
-				return errorMes;
-			}
-			File file = new File("out.txt");
-			PrintStream ps = new PrintStream(file);
-			System.setOut(ps);// 把创建的打印输出流赋给系统。
-			outPut();
-			
-			
+		
 			return errorMes;
 		
 	
@@ -206,7 +199,10 @@ public class MathExam6356 {
 
 	}
 
-	public static boolean outPut() {
+	public static boolean outPut() throws FileNotFoundException {
+		File file = new File("out.txt");
+		PrintStream ps = new PrintStream(file);
+		System.setOut(ps);// 把创建的打印输出流赋给系统。
 		for (int i = 0; i < n; i++) {
 			System.out.println("(" + (i + 1) + ") " + question[i]);
 		}
