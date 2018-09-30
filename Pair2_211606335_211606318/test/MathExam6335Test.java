@@ -196,9 +196,15 @@ public class MathExam6335Test {
 		
 		assertEquals(4, new MathExam6335().add(2,2,1)); 
 	}
+	
+	@Test
+	public void testSub_0() {
+		
+		assertEquals(2, new MathExam6335().sub(2,4,1)); 
+	}
 
 	@Test
-	public void testSub() {
+	public void testSub_1() {
 		assertEquals(0, new MathExam6335().sub(2,2,1));
 	}
 
@@ -215,7 +221,7 @@ public class MathExam6335Test {
 
 
 	@Test
-	public void testDiv_0() {
+	public void testDiv_0() { 
 		assertEquals("1", new MathExam6335().div(3,3,1));
 	}
 	
