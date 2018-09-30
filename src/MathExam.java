@@ -87,6 +87,7 @@ public class MathExam extends Operation{
 			}
 				//System.out.println(questionAndAnswer);
 				OutPutSet outPut=new OutPutSet(n); //µ÷ÓÃÊä³ö
+				
 			}else {
 				System.out.println(errorMessage);
 			}	

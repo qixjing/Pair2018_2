@@ -22,7 +22,10 @@ public class RandomQuestions extends Operation{
 		problemSave="";
 		problemSave="";
 		Random rand = new Random();
-		ArrayList<String> problemSet = new ArrayList<String>(); 
+		
+		ArrayList<String> problemSet = new ArrayList<String>();
+		//ArrayList<Object> problemSet = new ArrayList<Object>();
+		//problemSet = new ArrayList<String>(); 
 		howMany = rand.nextInt(3)+2;	// 需要几个运算符
 		
 		do {
@@ -30,8 +33,9 @@ public class RandomQuestions extends Operation{
 			for (int i = 0; i < 2 * howMany + 1; i++) { // 运算次数
 
 				if (i % 2 == 0) {
-					number = rand.nextInt(100) + 1;
+					number = rand.nextInt(40) + 1;// 缩小题目限制
 					problemSet.add(String.valueOf(number));
+					//problemSet.add(String.valueOf(number));
 				} else {
 					whichSymbol = rand.nextInt(4);
 					switch (whichSymbol) {
@@ -72,8 +76,10 @@ public class RandomQuestions extends Operation{
 		
 		if(needBracket) {	// 需要括号
 			positionCode(howMany); // 设置括号标准定位码
+		
 			for(int i = 0;i < positionCode.length(); i++) {
 				if(String.valueOf(positionCode.charAt(i)).equals("("))	// 扫描到左括号
+					
 					problemSet.add(i, String.valueOf(positionCode.charAt(i)));	// 添加进集合
 				else if(String.valueOf(positionCode.charAt(i)).equals(")"))	// 扫描到右括号
 					{
@@ -82,6 +88,7 @@ public class RandomQuestions extends Operation{
 					
 					}
 				}
+		
 			}
 		
 		
@@ -117,12 +124,12 @@ public class RandomQuestions extends Operation{
 		positionCode="";
 		Random rand = new Random();
 		int order = 0;
-		
+		//System.out.println("Ps+"+problemSet);
 		switch (howMany) {
 			case 2:{
 				order=rand.nextInt(2)+1;
-				if(order==1)	positionCode="(---)";
-				else positionCode="--(---)";
+				if(order==1)	 positionCode="(---)";
+				else   positionCode="--(---)";
 				break;
 			}
 			case 3:{
@@ -130,22 +137,27 @@ public class RandomQuestions extends Operation{
 				switch (order) {
 				case 1:{
 					positionCode="(---)-(---)";
+					
 					break;
 				}
 				case 2:{
 					positionCode="(-----)";
+					
 					break;
 				}
 				case 3:{
 					positionCode="(---)";
+					
 					break;
 				}
 				case 4:{
 					positionCode="--(---)";
+					
 					break;
 				}
 				case 5:{
-					positionCode="--(--(---))";
+					 positionCode="--(--(---))";
+					
 					break;
 				}
 								
@@ -157,30 +169,37 @@ public class RandomQuestions extends Operation{
 				switch (order) {
 				case 1:{
 					positionCode="(---)-(---)";
+					
 					break;
 				}
 				case 2:{
 					positionCode="--(---)-(---)";
+					
 					break;
 				}
 				case 3:{
-					positionCode="--((---)--)";
+					 positionCode="--((---)--)";
+					
 					break;
 				}
 				case 4:{
-					positionCode="--((---)-(---))";
+					 positionCode="--((---)-(---))";
+					
 					break;
 				}
 				case 5:{
-					positionCode="(-----)";
+					 positionCode="(-----)";
+					
 					break;
 				}
 				case 6:{
-					positionCode="--(-----)";
+					 positionCode="--(-----)";
+					
 					break;
 				}
 				case 7:{
 					positionCode="((---)--)-(---)";
+					
 					break;
 				}
 					
