@@ -27,7 +27,7 @@ public class ParameterTest{
 			{0,"-n","-1","-grade","1"},
 			{0,"-n","10","-grade","7"},
 			{0,"-n","0","-grade","1"},
-			{0,"-n","1002","-grade","2"},
+			{0,"-n","1002","-grade","2"}
 		});
 }
 
@@ -37,6 +37,7 @@ public ParameterTest(int expected,String input1,String input2,String input3,Stri
 	this.input2=input2;
 	this.input3=input3;
 	this.input4=input4;
+	}
 }
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -49,4 +50,4 @@ public ParameterTest(int expected,String input1,String input2,String input3,Stri
 		assertEquals(expected, new MathExam6329(input1,input2,input3,input4).start);;
 	}
 
-}
+
