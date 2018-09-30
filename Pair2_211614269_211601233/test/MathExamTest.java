@@ -12,12 +12,15 @@ public class MathExamTest {
 	@Test
 	public void testCheckTwo() {
 		fail("Not yet implemented");
-	}
+	}*/
 
 	@Test
 	public void testIsNum() {
-		fail("Not yet implemented");
-	}*/
+		assertEquals(true, MathExam.isNum("12345"));
+		assertEquals(false, MathExam.isNum("12x45"));
+		assertEquals(false, MathExam.isNum("x2345"));
+		assertEquals(false, MathExam.isNum("xxxxx"));
+	}
 
 	@Test
 	public void testCheckInput() {
