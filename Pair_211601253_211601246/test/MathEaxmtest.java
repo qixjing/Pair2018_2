@@ -1,9 +1,7 @@
 import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 public class MathEaxmtest {
-
 	@Test
 	public void test2() {
 		String[] abc= {"-n","10","-grade","2"};
@@ -19,5 +17,4 @@ public class MathEaxmtest {
 		String[] abc= {"-n","10","-grade","1"};
 		MathExam1253.main(abc);
 	}
-
 }
