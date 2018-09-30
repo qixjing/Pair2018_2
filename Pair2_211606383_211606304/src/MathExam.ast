@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompilationUnit beginColumn="1" beginLine="1" comments="[net.sourceforge.pmd.ast.MultiLineComment@4ebcd5dc]" endColumn="3" endLine="27">
+    <TypeDeclaration beginColumn="1" beginLine="1" endColumn="3" endLine="27">
+        <ClassOrInterfaceDeclaration abstract="false" beginColumn="8" beginLine="1" endColumn="3" endLine="27" final="false" image="MathExam" interface="false" modifiers="1" native="false" nested="false" packagePrivate="false" private="false" protected="false" public="true" static="false" strictfp="false" synchronized="false" transient="false" volatile="false">
+            <ClassOrInterfaceBody beginColumn="23" beginLine="1" endColumn="3" endLine="27">
+                <ClassOrInterfaceBodyDeclaration anonymousInnerClass="false" beginColumn="8" beginLine="2" endColumn="8" endLine="25" enumChild="false">
+                    <MethodDeclaration abstract="false" beginColumn="22" beginLine="2" block="Block" endColumn="8" endLine="25" final="false" interfaceMember="false" methodName="main" modifiers="17" native="false" packagePrivate="false" private="false" protected="false" public="true" resultType="ResultType" static="true" strictfp="false" synchronized="false" syntacticallyAbstract="false" syntacticallyPublic="true" transient="false" void="true" volatile="false">
+                        <ResultType beginColumn="22" beginLine="2" endColumn="25" endLine="2" void="true"/>
+                        <MethodDeclarator beginColumn="27" beginLine="2" endColumn="45" endLine="2" image="main" parameterCount="1">
+                            <FormalParameters beginColumn="31" beginLine="2" endColumn="45" endLine="2" parameterCount="1">
+                                <FormalParameter abstract="false" array="true" arrayDepth="1" beginColumn="32" beginLine="2" endColumn="44" endLine="2" final="false" modifiers="0" native="false" packagePrivate="true" private="false" protected="false" public="false" static="false" strictfp="false" synchronized="false" transient="false" typeNode="Type" varargs="false" volatile="false">
+                                    <Type array="true" arrayDepth="1" beginColumn="32" beginLine="2" endColumn="39" endLine="2" typeImage="String">
+                                        <ReferenceType array="true" arrayDepth="1" beginColumn="32" beginLine="2" endColumn="39" endLine="2">
+                                            <ClassOrInterfaceType beginColumn="32" beginLine="2" endColumn="37" endLine="2" image="String"/>
+                                        </ReferenceType>
+                                    </Type>
+                                    <VariableDeclaratorId array="false" arrayDepth="0" beginColumn="41" beginLine="2" endColumn="44" endLine="2" exceptionBlockParameter="false" image="args" typeNameNode="ReferenceType" typeNode="Type"/>
+                                </FormalParameter>
+                            </FormalParameters>
+                        </MethodDeclarator>
+                        <Block beginColumn="47" beginLine="2" endColumn="8" endLine="25">
+                            <BlockStatement allocation="true" beginColumn="12" beginLine="3" endColumn="53" endLine="3">
+                                <LocalVariableDeclaration abstract="false" array="false" arrayDepth="0" beginColumn="12" beginLine="3" endColumn="52" endLine="3" final="false" modifiers="0" native="false" packagePrivate="true" private="false" protected="false" public="false" static="false" strictfp="false" synchronized="false" transient="false" typeNode="Type" variableName="parameter" volatile="false">
+                                    <Type array="false" arrayDepth="0" beginColumn="12" beginLine="3" endColumn="20" endLine="3" typeImage="Parameter">
+                                        <ReferenceType array="false" arrayDepth="0" beginColumn="12" beginLine="3" endColumn="20" endLine="3">
+                                            <ClassOrInterfaceType beginColumn="12" beginLine="3" endColumn="20" endLine="3" image="Parameter"/>
+                                        </ReferenceType>
+                                    </Type>
+                                    <VariableDeclarator beginColumn="22" beginLine="3" endColumn="52" endLine="3">
+                                        <VariableDeclaratorId array="false" arrayDepth="0" beginColumn="22" beginLine="3" endColumn="30" endLine="3" exceptionBlockParameter="false" image="parameter" typeNameNode="ReferenceType" typeNode="Type"/>
+                                        <VariableInitializer beginColumn="34" beginLine="3" endColumn="52" endLine="3">
+                                            <Expression beginColumn="34" beginLine="3" endColumn="52" endLine="3">
+                                                <PrimaryExpression beginColumn="34" beginLine="3" endColumn="52" endLine="3">
+                                                    <PrimaryPrefix beginColumn="34" beginLine="3" endColumn="52" endLine="3">
+                                                        <AllocationExpression beginColumn="34" beginLine="3" endColumn="52" endLine="3">
+                                                            <ClassOrInterfaceType beginColumn="38" beginLine="3" endColumn="46" endLine="3" image="Parameter"/>
+                                                            <Arguments argumentCount="1" beginColumn="47" beginLine="3" endColumn="52" endLine="3">
+                                                                <ArgumentList beginColumn="48" beginLine="3" endColumn="51" endLine="3">
+                                                                    <Expression beginColumn="48" beginLine="3" endColumn="51" endLine="3">
+                                                                        <PrimaryExpression beginColumn="48" beginLine="3" endColumn="51" endLine="3">
+                                                                            <PrimaryPrefix beginColumn="48" beginLine="3" endColumn="51" endLine="3">
+                                                                                <Name beginColumn="48" beginLine="3" endColumn="51" endLine="3" image="args"/>
+                                                                            </PrimaryPrefix>
+                                                                        </PrimaryExpression>
+                                                                    </Expression>
+                                                                </ArgumentList>
+                                                            </Arguments>
+                                                        </AllocationExpression>
+                                                    </PrimaryPrefix>
+                                                </PrimaryExpression>
+                                            </Expression>
+                                        </VariableInitializer>
+                                    </VariableDeclarator>
+                                </LocalVariableDeclaration>
+                            </BlockStatement>
+                            <BlockStatement allocation="true" beginColumn="12" beginLine="4" endColumn="42" endLine="4">
+                                <LocalVariableDeclaration abstract="false" array="false" arrayDepth="0" beginColumn="12" beginLine="4" endColumn="41" endLine="4" final="false" modifiers="0" native="false" packagePrivate="true" private="false" protected="false" public="false" static="false" strictfp="false" synchronized="false" transient="false" typeNode="Type" variableName="make" volatile="false">
+                                    <Type array="false" arrayDepth="0" beginColumn="12" beginLine="4" endColumn="19" endLine="4" typeImage="TaskMake">
+                                        <ReferenceType array="false" arrayDepth="0" beginColumn="12" beginLine="4" endColumn="19" endLine="4">
+                                            <ClassOrInterfaceType beginColumn="12" beginLine="4" endColumn="19" endLine="4" image="TaskMake"/>
+                                        </ReferenceType>
+                                    </Type>
+                                    <VariableDeclarator beginColumn="21" beginLine="4" endColumn="41" endLine="4">
+                                        <VariableDeclaratorId array="false" arrayDepth="0" beginColumn="21" beginLine="4" endColumn="24" endLine="4" exceptionBlockParameter="false" image="make" typeNameNode="ReferenceType" typeNode="Type"/>
+                                        <VariableInitializer beginColumn="28" beginLine="4" endColumn="41" endLine="4">
+                                            <Expression beginColumn="28" beginLine="4" endColumn="41" endLine="4">
+                                                <PrimaryExpression beginColumn="28" beginLine="4" endColumn="41" endLine="4">
+                                                    <PrimaryPrefix beginColumn="28" beginLine="4" endColumn="41" endLine="4">
+                                                        <AllocationExpression beginColumn="28" beginLine="4" endColumn="41" endLine="4">
+                                                            <ClassOrInterfaceType beginColumn="32" beginLine="4" endColumn="39" endLine="4" image="TaskMake"/>
+                                                            <Arguments argumentCount="0" beginColumn="40" beginLine="4" endColumn="41" endLine="4"/>
+                                                        </AllocationExpression>
+                                                    </PrimaryPrefix>
+                                                </PrimaryExpression>
+                                            </Expression>
+                                        </VariableInitializer>
+                                    </VariableDeclarator>
+                                </LocalVariableDeclaration>
+                            </BlockStatement>
+                            <BlockStatement allocation="false" beginColumn="12" beginLine="5" endColumn="12" endLine="24">
+                                <Statement beginColumn="12" beginLine="5" endColumn="12" endLine="24">
+                                    <SwitchStatement beginColumn="12" beginLine="5" endColumn="12" endLine="24">
+                                        <Expression beginColumn="19" beginLine="5" endColumn="38" endLine="5">
+                                            <PrimaryExpression beginColumn="19" beginLine="5" endColumn="38" endLine="5">
+                                                <PrimaryPrefix beginColumn="19" beginLine="5" endColumn="36" endLine="5">
+                                                    <Name beginColumn="19" beginLine="5" endColumn="36" endLine="5" image="parameter.GetGrade"/>
+                                                </PrimaryPrefix>
+                                                <PrimarySuffix argumentCount="0" arguments="true" arrayDereference="false" beginColumn="37" beginLine="5" endColumn="38" endLine="5">
+                                                    <Arguments argumentCount="0" beginColumn="37" beginLine="5" endColumn="38" endLine="5"/>
+                                                </PrimarySuffix>
+                                            </PrimaryExpression>
+                                        </Expression>
+                                        <SwitchLabel beginColumn="12" beginLine="6" default="false" endColumn="18" endLine="6">
+                                            <Expression beginColumn="17" beginLine="6" endColumn="17" endLine="6">
+                                                <PrimaryExpression beginColumn="17" beginLine="6" endColumn="17" endLine="6">
+                                                    <PrimaryPrefix beginColumn="17" beginLine="6" endColumn="17" endLine="6">
+                                                        <Literal beginColumn="17" beginLine="6" charLiteral="false" endColumn="17" endLine="6" floatLiteral="false" image="1" intLiteral="true" singleCharacterStringLiteral="false" stringLiteral="false"/>
+                                                    </PrimaryPrefix>
+                                                </PrimaryExpression>
+                                            </Expression>
+                                        </SwitchLabel>
+                                        <BlockStatement allocation="false" beginColumn="19" beginLine="6" endColumn="12" endLine="9">
+                                            <Statement beginColumn="19" beginLine="6" endColumn="12" endLine="9">
+                                                <Block beginColumn="19" beginLine="6" endColumn="12" endLine="9">
+                                                    <BlockStatement allocation="false" beginColumn="20" beginLine="7" endColumn="60" endLine="7">
+                                                        <Statement beginColumn="20" beginLine="7" endColumn="60" endLine="7">
+                                                            <StatementExpression beginColumn="20" beginLine="7" endColumn="59" endLine="7">
+                                                                <PrimaryExpression beginColumn="20" beginLine="7" endColumn="59" endLine="7">
+                                                                    <PrimaryPrefix beginColumn="20" beginLine="7" endColumn="36" endLine="7">
+                                                                        <Name beginColumn="20" beginLine="7" endColumn="36" endLine="7" image="make.MakeGradeOne"/>
+                                                                    </PrimaryPrefix>
+                                                                    <PrimarySuffix argumentCount="1" arguments="true" arrayDereference="false" beginColumn="37" beginLine="7" endColumn="59" endLine="7">
+                                                                        <Arguments argumentCount="1" beginColumn="37" beginLine="7" endColumn="59" endLine="7">
+                                                                            <ArgumentList beginColumn="38" beginLine="7" endColumn="58" endLine="7">
+                                                                                <Expression beginColumn="38" beginLine="7" endColumn="58" endLine="7">
+                                                                                    <PrimaryExpression beginColumn="38" beginLine="7" endColumn="58" endLine="7">
+                                                                                        <PrimaryPrefix beginColumn="38" beginLine="7" endColumn="56" endLine="7">
+                                                                                            <Name beginColumn="38" beginLine="7" endColumn="56" endLine="7" image="parameter.GetNumber"/>
+                                                                                        </PrimaryPrefix>
+                                                                                        <PrimarySuffix argumentCount="0" arguments="true" arrayDereference="false" beginColumn="57" beginLine="7" endColumn="58" endLine="7">
+                                                                                            <Arguments argumentCount="0" beginColumn="57" beginLine="7" endColumn="58" endLine="7"/>
+                                                                                        </PrimarySuffix>
+                                                                                    </PrimaryExpression>
+                                                                                </Expression>
+                                                                            </ArgumentList>
+                                                                        </Arguments>
+                                                                    </PrimarySuffix>
+                                                                </PrimaryExpression>
+                                                            </StatementExpression>
+                                                        </Statement>
+                                                    </BlockStatement>
+                                                    <BlockStatement allocation="false" beginColumn="20" beginLine="8" endColumn="25" endLine="8">
+                                                        <Statement beginColumn="20" beginLine="8" endColumn="25" endLine="8">
+                                                            <BreakStatement beginColumn="20" beginLine="8" endColumn="25" endLine="8"/>
+                                                        </Statement>
+                                                    </BlockStatement>
+                                                </Block>
+                                            </Statement>
+                                        </BlockStatement>
+                                        <SwitchLabel beginColumn="12" beginLine="10" default="false" endColumn="18" endLine="10">
+                                            <Expression beginColumn="17" beginLine="10" endColumn="17" endLine="10">
+                                                <PrimaryExpression beginColumn="17" beginLine="10" endColumn="17" endLine="10">
+                                                    <PrimaryPrefix beginColumn="17" beginLine="10" endColumn="17" endLine="10">
+                                                        <Literal beginColumn="17" beginLine="10" charLiteral="false" endColumn="17" endLine="10" floatLiteral="false" image="2" intLiteral="true" singleCharacterStringLiteral="false" stringLiteral="false"/>
+                                                    </PrimaryPrefix>
+                                                </PrimaryExpression>
+                                            </Expression>
+                                        </SwitchLabel>
+                                        <BlockStatement allocation="false" beginColumn="19" beginLine="10" endColumn="12" endLine="13">
+                                            <Statement beginColumn="19" beginLine="10" endColumn="12" endLine="13">
+                                                <Block beginColumn="19" beginLine="10" endColumn="12" endLine="13">
+                                                    <BlockStatement allocation="false" beginColumn="20" beginLine="11" endColumn="60" endLine="11">
+                                                        <Statement beginColumn="20" beginLine="11" endColumn="60" endLine="11">
+                                                            <StatementExpression beginColumn="20" beginLine="11" endColumn="59" endLine="11">
+                                                                <PrimaryExpression beginColumn="20" beginLine="11" endColumn="59" endLine="11">
+                                                                    <PrimaryPrefix beginColumn="20" beginLine="11" endColumn="36" endLine="11">
+                                                                        <Name beginColumn="20" beginLine="11" endColumn="36" endLine="11" image="make.MakeGradeTwo"/>
+                                                                    </PrimaryPrefix>
+                                                                    <PrimarySuffix argumentCount="1" arguments="true" arrayDereference="false" beginColumn="37" beginLine="11" endColumn="59" endLine="11">
+                                                                        <Arguments argumentCount="1" beginColumn="37" beginLine="11" endColumn="59" endLine="11">
+                                                                            <ArgumentList beginColumn="38" beginLine="11" endColumn="58" endLine="11">
+                                                                                <Expression beginColumn="38" beginLine="11" endColumn="58" endLine="11">
+                                                                                    <PrimaryExpression beginColumn="38" beginLine="11" endColumn="58" endLine="11">
+                                                                                        <PrimaryPrefix beginColumn="38" beginLine="11" endColumn="56" endLine="11">
+                                                                                            <Name beginColumn="38" beginLine="11" endColumn="56" endLine="11" image="parameter.GetNumber"/>
+                                                                                        </PrimaryPrefix>
+                                                                                        <PrimarySuffix argumentCount="0" arguments="true" arrayDereference="false" beginColumn="57" beginLine="11" endColumn="58" endLine="11">
+                                                                                            <Arguments argumentCount="0" beginColumn="57" beginLine="11" endColumn="58" endLine="11"/>
+                                                                                        </PrimarySuffix>
+                                                                                    </PrimaryExpression>
+                                                                                </Expression>
+                                                                            </ArgumentList>
+                                                                        </Arguments>
+                                                                    </PrimarySuffix>
+                                                                </PrimaryExpression>
+                                                            </StatementExpression>
+                                                        </Statement>
+                                                    </BlockStatement>
+                                                    <BlockStatement allocation="false" beginColumn="20" beginLine="12" endColumn="25" endLine="12">
+                                                        <Statement beginColumn="20" beginLine="12" endColumn="25" endLine="12">
+                                                            <BreakStatement beginColumn="20" beginLine="12" endColumn="25" endLine="12"/>
+                                                        </Statement>
+                                                    </BlockStatement>
+                                                </Block>
+                                            </Statement>
+                                        </BlockStatement>
+                                        <SwitchLabel beginColumn="12" beginLine="14" default="false" endColumn="18" endLine="14">
+                                            <Expression beginColumn="17" beginLine="14" endColumn="17" endLine="14">
+                                                <PrimaryExpression beginColumn="17" beginLine="14" endColumn="17" endLine="14">
+                                                    <PrimaryPrefix beginColumn="17" beginLine="14" endColumn="17" endLine="14">
+                                                        <Literal beginColumn="17" beginLine="14" charLiteral="false" endColumn="17" endLine="14" floatLiteral="false" image="3" intLiteral="true" singleCharacterStringLiteral="false" stringLiteral="false"/>
+                                                    </PrimaryPrefix>
+                                                </PrimaryExpression>
+                                            </Expression>
+                                        </SwitchLabel>
+                                        <BlockStatement allocation="false" beginColumn="19" beginLine="14" endColumn="12" endLine="17">
+                                            <Statement beginColumn="19" beginLine="14" endColumn="12" endLine="17">
+                                                <Block beginColumn="19" beginLine="14" endColumn="12" endLine="17">
+                                                    <BlockStatement allocation="false" beginColumn="20" beginLine="15" endColumn="62" endLine="15">
+                                                        <Statement beginColumn="20" beginLine="15" endColumn="62" endLine="15">
+                                                            <StatementExpression beginColumn="20" beginLine="15" endColumn="61" endLine="15">
+                                                                <PrimaryExpression beginColumn="20" beginLine="15" endColumn="61" endLine="15">
+                                                                    <PrimaryPrefix beginColumn="20" beginLine="15" endColumn="38" endLine="15">
+                                                                        <Name beginColumn="20" beginLine="15" endColumn="38" endLine="15" image="make.MakeGradeThree"/>
+                                                                    </PrimaryPrefix>
+                                                                    <PrimarySuffix argumentCount="1" arguments="true" arrayDereference="false" beginColumn="39" beginLine="15" endColumn="61" endLine="15">
+                                                                        <Arguments argumentCount="1" beginColumn="39" beginLine="15" endColumn="61" endLine="15">
+                                                                            <ArgumentList beginColumn="40" beginLine="15" endColumn="60" endLine="15">
+                                                                                <Expression beginColumn="40" beginLine="15" endColumn="60" endLine="15">
+                                                                                    <PrimaryExpression beginColumn="40" beginLine="15" endColumn="60" endLine="15">
+                                                                                        <PrimaryPrefix beginColumn="40" beginLine="15" endColumn="58" endLine="15">
+                                                                                            <Name beginColumn="40" beginLine="15" endColumn="58" endLine="15" image="parameter.GetNumber"/>
+                                                                                        </PrimaryPrefix>
+                                                                                        <PrimarySuffix argumentCount="0" arguments="true" arrayDereference="false" beginColumn="59" beginLine="15" endColumn="60" endLine="15">
+                                                                                            <Arguments argumentCount="0" beginColumn="59" beginLine="15" endColumn="60" endLine="15"/>
+                                                                                        </PrimarySuffix>
+                                                                                    </PrimaryExpression>
+                                                                                </Expression>
+                                                                            </ArgumentList>
+                                                                        </Arguments>
+                                                                    </PrimarySuffix>
+                                                                </PrimaryExpression>
+                                                            </StatementExpression>
+                                                        </Statement>
+                                                    </BlockStatement>
+                                                    <BlockStatement allocation="false" beginColumn="20" beginLine="16" endColumn="25" endLine="16">
+                                                        <Statement beginColumn="20" beginLine="16" endColumn="25" endLine="16">
+                                                            <BreakStatement beginColumn="20" beginLine="16" endColumn="25" endLine="16"/>
+                                                        </Statement>
+                                                    </BlockStatement>
+                                                </Block>
+                                            </Statement>
+                                        </BlockStatement>
+                                    </SwitchStatement>
+                                </Statement>
+                            </BlockStatement>
+                        </Block>
+                    </MethodDeclaration>
+                </ClassOrInterfaceBodyDeclaration>
+            </ClassOrInterfaceBody>
+        </ClassOrInterfaceDeclaration>
+    </TypeDeclaration>
+</CompilationUnit>
