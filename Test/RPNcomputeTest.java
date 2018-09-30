@@ -19,7 +19,8 @@ class RPNcomputeTest {
 	}
 	@Test
 	void testRPNcalculate3() {
-		assertEquals(6525, new RPNcompute().RPNcalculate("87 * ( 25 * 19 / 76 ) * 12"));
+		assertEquals(Double.NEGATIVE_INFINITY, 
+				new RPNcompute().RPNcalculate("^ * # + &"));
 	}
 
 }
