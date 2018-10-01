@@ -47,12 +47,7 @@ public class ExamThread implements Runnable{
 				String result = po.calculate();
 				topic2.append("(" + (i) + ") " + topic + "\n");
 				topic3.append("(" + (i) + ") " + topic + " = " + result);
-//				if (mod != 0) {
-//					topic3.append("..." + mod);
-//					mod = 0;
-//				}
 				topic3.append("\n");
-				//( 360 - 71 ) / 17 - 17 = 0        ´ý½â¾ö
 			}
 		} else if (grade == 3) {
 			for (int i = number; i < count + number; i++) {

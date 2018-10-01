@@ -8,15 +8,15 @@ public class MathExam{
 	static boolean flag = true;  //为测试方便，不设置成private
 
 	public static void main(String[] args) {
-//		long timeStart = System.currentTimeMillis();  //测试时间
+		long timeStart = System.currentTimeMillis();  //测试时间
 		
 		checkInput(args); //检查输入是否符合规范
 		String txt = createThread();//创建线程
 		Txt.createMathExamTxt(txt);//生成文本
 		
-//		long timeEnd = System.currentTimeMillis();//测试时间
+		long timeEnd = System.currentTimeMillis();//测试时间
 //		System.out.println(txt);
-//		System.out.println(timeEnd - timeStart); 
+//		System.out.println(timeEnd - timeStart + " ms"); 
 	}
 
 	private static String createThread() {
@@ -59,14 +59,17 @@ public class MathExam{
 
 	// 检查输入的参数是否符合规范
 	private static void checkInput(String[] args) {
-		// System.out.println(args.length);//test
 		if (args.length != 4) {
 			exception();
 		}
 		String input = args[0] + " " + args[1] + " " + args[2] + " " + args[3];
-		// System.out.println(input);//test
 		// -grade和-n的顺序可以颠倒
-		input.matches("(\\-grade [123] \\-n [1-9]\\d*)|(\\-n [1-9]\\d* \\-grade [123])");
+		if(input.matches("(\\-grade [123] \\-n [1-9]\\d*)|(\\-n [1-9]\\d* \\-grade [123])"))
+			;
+		else {
+			exception();
+		}
+		
 		Matcher m = Pattern.compile("\\-grade [123]").matcher(input);
 
 		if (m.find()) {
@@ -89,7 +92,7 @@ public class MathExam{
 			String digit = null;
 			if (m.find()) {
 				digit = m.group();
-				if (digit.length() >= 9) {
+				if (digit.length() >= 5) {
 					exception();
 				}
 			}
@@ -103,7 +106,7 @@ public class MathExam{
 	private static void exception() {
 		System.out.println("输入有误,程序结束。");
 		flag=false;
-//		System.exit(0);
+		System.exit(0);
 	}
 
 	// 产生txt文本

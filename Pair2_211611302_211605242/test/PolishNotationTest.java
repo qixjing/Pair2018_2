@@ -30,13 +30,10 @@ public class PolishNotationTest{
 	public PolishNotationTest(String expected,StringBuffer input1) {
 		this.expected=expected;
 		this.input1 = input1;
-//		this.input2 = input2;
 	}
 	
 	@Test
 	public void testPolish() {
-//		PolishNotation p = new PolishNotation(new StringBuffer(" 21 ¡Á ( 30 + 21 ) - 38 "));
-//		System.out.println(input1);
 		assertEquals(expected,new PolishNotation(input1).calculate());
 	}
 
