@@ -50,8 +50,6 @@ public class Calculate {
 	// 将字符串的题目切割成数值和符号
 	public static void cutStr() {
 		int n = 0;
-		String str = squestion.replaceAll(" ", "");
-		squestion = str;
 		for (int i = 0; i < squestion.length(); i++) {
 			if (Character.isDigit(squestion.charAt(i))) {
 				if ((i + 1) < squestion.length() && Character.isDigit(squestion.charAt(i + 1))) {
@@ -66,8 +64,11 @@ public class Calculate {
 					n++;
 				}
 			} else {
-				scut[n] = String.valueOf(squestion.charAt(i));
-				n++;
+				if(squestion.charAt(i)!=' ') {
+					scut[n] = String.valueOf(squestion.charAt(i));
+					n++;
+				}
+				
 			}
 		}
 		slen = n;
